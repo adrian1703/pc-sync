@@ -6,6 +6,7 @@ alias ls='ls -F --color=auto --show-control-chars'
 alias ll='ls -lah'
 alias cll='clear; ls -lah'
 alias dev='cd $DEV'
+alias proj='cd $DEV/projects'
 
 case "$TERM" in
 xterm*)
