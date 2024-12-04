@@ -1,4 +1,4 @@
-$dev = "C:\Development"
+$dev = "C:\development"
 $git = "PortableGit"
 $scripts = "SetupScripts"
 
