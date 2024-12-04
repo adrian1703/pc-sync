@@ -1,10 +1,6 @@
 [user]
     name = adrian
     email = adrian.kuhn@arcor.de
-[core]
-	symlinks = false
-	autocrlf = true
-	fscache = true
 [color]
 	interactive = true
 	ui = auto
@@ -19,9 +15,18 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[credential]
-	helper = helper-selector
-[init]
-	defaultBranch = main
+[http]
+	sslBackend = openssl
+	sslCAInfo = ../mingw64/etc/ssl/certs/ca-bundle.crt
+[core]
+	autocrlf = true
+	fscache = true
+	symlinks = false
 [pull]
 	rebase = true
+[credential]
+	helper = manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[init]
+	defaultBranch = main
