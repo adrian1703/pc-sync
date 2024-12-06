@@ -1,16 +1,35 @@
 #! /usr/bin/env pwsh
+param (
+# Define the configuration file parameter
+    [Parameter(Mandatory=$false)]
+    [string] $config_file = "./src/Git/git_options.ini", # Default value if no argument is supplied
 
+# Define the skip download parameter
+    [Parameter(Mandatory=$false)]
+    [switch] $skipdownload = $false # Default value is false
+)
 # 1. Define the URL of the Git Bash installer
 $git_exe='GitBashInstaller.exe'
 $git_dl_link='https://github.com/git-for-windows/git/releases/download/v2.47.1.windows.1/Git-2.47.1-64-bit.exe'
 $downloadFolder = "c:/development/temp"
-$config_file = "./git_options.ini"
+
+if (Test-Path $config_file) {
+    # Print the first line of $config_file
+    Get-Content $config_file | Select-Object -First 1
+} else {
+    Write-Host "$config_file does not exist."
+    Exit
+}
 
 # 2. Define the path where the installer will be saved
-if (!(Test-Path $downloadFolder)) {
-    New-Item -ItemType Directory -Force -Path $downloadFolder
+if(!$skipdownload) {
+    if (!(Test-Path $downloadFolder)) {
+        New-Item -ItemType Directory -Force -Path $downloadFolder
+    }
+    $installerPath = "$downloadFolder/$git_exe"
+} else {
+    Write-Host "Skipping download of installer."
 }
-$installerPath = "$downloadFolder/$git_exe"
 
 # 3. Download the installer
 Write-Host "Downloading Git Bash installer... to $installerPath"
