@@ -12,6 +12,7 @@ param (
 $git_exe='GitBashInstaller.exe'
 $git_dl_link='https://github.com/git-for-windows/git/releases/download/v2.47.1.windows.1/Git-2.47.1-64-bit.exe'
 $downloadFolder = "c:/development/temp"
+$targetFolder = "c:/development/utils/Git"
 
 if (Test-Path $config_file) {
     # Print the first line of $config_file
@@ -19,6 +20,10 @@ if (Test-Path $config_file) {
 } else {
     Write-Host "$config_file does not exist."
     Exit
+}
+
+if (!(Test-Path $targetFolder)) {
+    New-Item -ItemType Directory -Force -Path $targetFolder
 }
 
 # 2. Define the path where the installer will be saved
@@ -37,7 +42,7 @@ if(!$skipdownload) {
 }
 # 4. Install Git Bash
 Write-Host "Installing Git Bash..."
-Start-Process -FilePath $installerPath -Args "/VERYSILENT /NORESTART /NOCANCEL /LOADINF=$config_file"
+Start-Process -FilePath $installerPath -Args "/SILENT /NORESTART /NOCANCEL /LOADINF=$config_file"
 #
 ## 5. Clean up the installer
 #Remove-Item -Path $installerPath
