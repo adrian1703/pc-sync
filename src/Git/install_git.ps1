@@ -15,7 +15,7 @@ $downloadFolder = "c:/development/temp"
 
 if (Test-Path $config_file) {
     # Print the first line of $config_file
-    Get-Content $config_file | Select-Object -First 1
+    Write-Host "$config_file is present."
 } else {
     Write-Host "$config_file does not exist."
     Exit
