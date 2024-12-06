@@ -1,1 +1,0 @@
-grep = global_vars.ini | sed°
