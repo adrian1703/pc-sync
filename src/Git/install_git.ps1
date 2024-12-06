@@ -22,19 +22,19 @@ if (Test-Path $config_file) {
 }
 
 # 2. Define the path where the installer will be saved
+if (!(Test-Path $downloadFolder)) {
+    New-Item -ItemType Directory -Force -Path $downloadFolder
+}
+$installerPath = "$downloadFolder/$git_exe"
+
+
+# 3. Download the installer
 if(!$skipdownload) {
-    if (!(Test-Path $downloadFolder)) {
-        New-Item -ItemType Directory -Force -Path $downloadFolder
-    }
-    $installerPath = "$downloadFolder/$git_exe"
+    Write-Host "Downloading Git Bash installer... to $installerPath"
+    Invoke-WebRequest -Uri $git_dl_link -OutFile $installerPath
 } else {
     Write-Host "Skipping download of installer."
 }
-
-# 3. Download the installer
-Write-Host "Downloading Git Bash installer... to $installerPath"
-Invoke-WebRequest -Uri $git_dl_link -OutFile $installerPath
-
 # 4. Install Git Bash
 Write-Host "Installing Git Bash..."
 Start-Process -FilePath $installerPath -Args "/VERYSILENT /NORESTART /NOCANCEL /LOADINF=$config_file"
