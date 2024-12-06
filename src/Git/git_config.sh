@@ -1,7 +1,7 @@
 #!/bin/bash
 
-repo_dir="$DEV/projects/ReinstallPc/src/PortableGit/etc/"
-git_dir="$DEV/utils/PortableGit/etc/"
+repo_dir="$DEV/projects/ReinstallPc/src/Git/etc/"
+git_dir="$DEV/utils/Git/etc/"
 files=$(find "$repo_dir" -type f | sed -E 's|.*/etc/||')
 
 print_files() {
