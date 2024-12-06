@@ -1,6 +1,6 @@
 #!/bin/bash
 
-repo_dir="$DEV/projects/ReinstallPc/src/Git/etc/"
+repo_dir="$DEV/projects/ReinstallPc/Git/etc/"
 git_dir="$DEV/utils/Git/etc/"
 files=$(find "$repo_dir" -type f | sed -E 's|.*/etc/||')
 

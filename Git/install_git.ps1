@@ -2,7 +2,7 @@
 param (
 # Define the configuration file parameter
     [Parameter(Mandatory=$false)]
-    [string] $config_file = "./src/Git/git_options.ini", # Default value if no argument is supplied
+    [string] $config_file = "./Git/git_options.ini", # Default value if no argument is supplied
 
 # Define the skip download parameter
     [Parameter(Mandatory=$false)]
