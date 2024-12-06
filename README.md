@@ -1,3 +1,5 @@
 # Targets
 
-1. Git Bash installieren
+## Git Bash installieren
+
+```./src/Git/install_git.ps1```powershell

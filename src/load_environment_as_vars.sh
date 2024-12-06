@@ -50,9 +50,9 @@ export_kv_pairs() {
 
 # Main function
 main() {
-  # Allow overriding the global_vars file via a command-line argument or environment variable
+  # Allow overriding the environment file via a command-line argument or environment variable
   dir="$(echo "$0" | sed -E 's#/[^/]*$##' )"
-  vars_file="${1:-"$dir/global_vars.ini"}"
+  vars_file="${1:-"$dir/environment.ini"}"
   # Ensure the file exists
   if [[ ! -f "$vars_file" ]]; then
     echo "Error: Configuration file '$vars_file' not found."

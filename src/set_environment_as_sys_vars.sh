@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Source the variables file
-source ./load_globals_unix.sh
+source ./load_environment_as_vars.sh
 
 # Grab the env section and set capitalized keys with path values
-sed -n '/#### ENV/ ,/####/{/####/!p}' "./global_vars.ini" | cut -d= -f1 |
+sed -n '/#### ENV/ ,/####/{/####/!p}' "./environment.ini" | cut -d= -f1 |
 while read var; do
   var_upper="$(echo "$var" | sed 's/.*/\U&/')"
   value="${!var}"
