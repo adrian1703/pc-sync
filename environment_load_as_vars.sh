@@ -1,4 +1,9 @@
 #!/bin/bash
+###############################################################
+# This script is used to import the environment.ini file as   #
+# variables in the the shell script that this is called from. #
+###############################################################
+
 
 # Function to read lines containing "=" from the file
 read_lines() {
@@ -31,15 +36,6 @@ process_kv_pairs() {
     echo "$k=${vars[$k]}"
   done
 }
-
-## Function to export variables from a formatted key-value input
-#export_kv_pairs() {
-#  while IFS= read -r line; do
-#    key=$(echo "$line" | cut -d= -f1)
-#    value=$(echo "$line" | cut -d= -f2-)
-#    echo "export $key=\"$value\""
-#  done
-#}
 
 # Function to export variables from a formatted key-value input
 export_kv_pairs() {
