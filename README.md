@@ -12,9 +12,10 @@
 1. open bash
 2. nav to the root of this proj
 3. ``./environment_set_as_sys_vars.sh`` for setting the env vars
-4. reopen bash (for loading sys vars into the bash context)
-5. nav to the root of this proj
-6. ``./git_config.sh -pull`` for setting the env vars
+4. check if ides is capitalized
+5. reopen bash (for loading sys vars into the bash context)
+6. nav to the root of this proj
+7. ``./git_config.sh -pull`` for pulling git config
 ---
 ## Shell helper
 
