@@ -1,4 +1,5 @@
 #!/bin/bash
+# not working atm cannot get the silent install to function switching to ps1
 
 installer="ideaIU-latest.exe"
 dl_link="https://download.jetbrains.com/idea/ideaIU-latest.exe"
@@ -29,7 +30,7 @@ fi
 
 # Run the installer silently
 echo "Running the installer in silent mode..."
-"$dl_folder/$installer" /S /CONFIG="$silent_config" /LOG="$log_file" /D="$trgt_folder"
+# "$dl_folder/$installer" /S /CONFIG="$silent_config" /LOG="$log_file" /D="$trgt_folder"
 
 # Check installer success
 if [ $? -eq 0 ]; then
