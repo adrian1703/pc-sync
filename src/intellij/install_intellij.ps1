@@ -10,9 +10,9 @@ $dl_link="https://download.jetbrains.com/idea/ideaIU-2024.3.1.1.exe"
 $installer="ideaIU-latest.exe"
 $dl_folder="$env:TMP"
 $installer_full_path=Join-Path $dl_folder $installer
-$trgt_folder="$env:IDES/jetbrains/IntelliJ IDEA Ultimate" # this is somehow sometimes lowercase dont ask me why
-$silent_config="$env:SETUP_PROJ/src/intellij/silent.config"
-$log_file="$env:TMP/intellij_install.log"
+$trgt_folder=Join-Path $env:IDES "jetbrains\IntelliJ IDEA Ultimate" # this is somehow sometimes lowercase dont ask me why
+$silent_config=Join-Path $env:SETUP_PROJ "src\intellij\silent.config"
+$log_file=Join-Path $env:TMP "intellij_install.log"
 
 echo "Installing Intellij ..."
 echo "download link: $dl_link"
