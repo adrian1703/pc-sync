@@ -22,12 +22,17 @@ echo "full: $installer_full_path"
 echo "target folder: $trgt_folder"
 
 # Ensure target folder exists
-mkdir -p "$dl_folder"
+# mkdir -p "$dl_folder"
+if (Test-Path -Path $dl_folder)
+{
+    New-Item -ItemType Directory -Path $dlFolder | Out-Null
+}
 
 # Download the installer
 if (!$skipdownload)
 {
-    curl -L $dl_link -o $installer_full_path
+#    curl -L $dl_link -o $installer_full_path
+    Invoke-WebRequest -Uri $dlLink -OutFile $installerPath
 }
 
 # Check if download file exists
