@@ -8,11 +8,11 @@ param (
 
 $dl_link="https://download.jetbrains.com/idea/ideaIU-latest.exe"
 $installer="ideaIU-latest.exe"
-$dl_folder="$TMP"
+$dl_folder="$env:TMP"
 $installer_full_path=Join-Path $dl_folder $installer
-$trgt_folder="$IDES/jetbrains/IntelliJ IDEA Ultimate" # this is somehow sometimes lowercase dont ask me why
-$silent_config="$SETUP_PROJ/src/intellij/silent.config"
-$log_file="$TMP/intellij_install.log"
+$trgt_folder="$env:IDES/jetbrains/IntelliJ IDEA Ultimate" # this is somehow sometimes lowercase dont ask me why
+$silent_config="$env:SETUP_PROJ/src/intellij/silent.config"
+$log_file="$env:TMP/intellij_install.log"
 
 echo "Installing Intellij ..."
 echo "download link: $dl_link"
