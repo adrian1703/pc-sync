@@ -32,7 +32,7 @@ if (!(Test-Path -Path $dl_folder))
 if (!$skipdownload)
 {
 #    curl -L $dl_link -o $installer_full_path
-    Invoke-WebRequest -Uri $dlLink -OutFile $installerPath
+    Invoke-WebRequest -Uri $dl_link -OutFile $installer_full_path
 }
 
 # Check if download file exists
