@@ -48,13 +48,13 @@ else
 
 # Run installer silent mode
 Write-Host "Running the installer in silent mode..."
-& $installerPath "/S" "/CONFIG=$silentConfig" "/LOG=$logFile" "/D=$trgtFolder"
+& $installer_full_path "/S" "/CONFIG=$silent_config" "/LOG=$log_file" "/D=$trgt_folder"
 
 # Check installer success
 if ($LASTEXITCODE -eq 0)
 {
     Write-Host "IntelliJ IDEA Ultimate installed successfully."
-    Write-Host "Log file: $logFile"
+    Write-Host "Log file: $log_file"
 }
 else
 {
