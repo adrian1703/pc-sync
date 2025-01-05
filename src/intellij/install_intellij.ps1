@@ -23,7 +23,7 @@ echo "target folder: $trgt_folder"
 
 # Ensure target folder exists
 # mkdir -p "$dl_folder"
-if (Test-Path -Path $dl_folder)
+if (!(Test-Path -Path $dl_folder))
 {
     New-Item -ItemType Directory -Path $dl_folder | Out-Null
 }
