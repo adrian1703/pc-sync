@@ -25,7 +25,7 @@ echo "target folder: $trgt_folder"
 # mkdir -p "$dl_folder"
 if (Test-Path -Path $dl_folder)
 {
-    New-Item -ItemType Directory -Path $dlFolder | Out-Null
+    New-Item -ItemType Directory -Path $dl_folder | Out-Null
 }
 
 # Download the installer
