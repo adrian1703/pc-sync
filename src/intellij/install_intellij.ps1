@@ -6,7 +6,7 @@ param (
     [switch] $skipdownload = $false # Default value is false
 )
 
-$dl_link="https://download.jetbrains.com/idea/ideaIU-latest.exe"
+$dl_link="https://download.jetbrains.com/idea/ideaIU-2024.3.1.1.exe"
 $installer="ideaIU-latest.exe"
 $dl_folder="$env:TMP"
 $installer_full_path=Join-Path $dl_folder $installer
