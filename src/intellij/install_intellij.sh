@@ -37,6 +37,6 @@ if [ $? -eq 0 ]; then
   echo "IntelliJ IDEA Ultimate installed successfully."
   echo "Log file: $log_file"
 else
-  echo "Failed to install IntelliJ IDEA Ultimate."
+  echo "Failed to install IntelliJ IDEA Ultimate. (If executed in bash installation may have succeeded anyway. Please check.)"
   exit 1
 fi
