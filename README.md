@@ -52,9 +52,11 @@ PS C:\development\projects\ReinstallPc>
 - ```src/intellij/install.ps1```
 - ```src/rider/install.ps1```
 - ```src/jetbrains-toolbox/install.ps1```
-   - kinda meh about this.. installs in appdata
-   - need to configure path to $ides
-- ```src/chrome/install.ps1```
+     - kinda meh about this.. installs in appdata
+     - need to configure path to $ides
+- ```src/chrome/ChromeSetup.exe``` manual
+- ```src/postgres/install.ps1``` wip
+- ```src/pgadmin/install.ps1``` wip
 ---
 ## Shell helper
 
