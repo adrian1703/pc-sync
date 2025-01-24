@@ -57,6 +57,7 @@ PS C:\development\projects\ReinstallPc>
 - ```src/chrome/ChromeSetup.exe``` manual
 - ```src/postgres/install.ps1``` wip
 - ```src/pgadmin/install.ps1``` wip
+- ```src/notepad++/``` portable zip need script for unwarpping
 ---
 ## Shell helper
 
