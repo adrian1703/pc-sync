@@ -5,7 +5,7 @@ param (
     [Parameter(Mandatory=$false)]
     [switch] $skipdownload = $false # Default value is false
 )
-
+$tool="Intellij"
 $dl_link="https://download.jetbrains.com/idea/ideaIU-2024.3.1.1.exe"
 $installer="ideaIU-latest.exe"
 $dl_folder="$env:TMP"
@@ -14,7 +14,7 @@ $trgt_folder=Join-Path $env:IDES "jetbrains\IntelliJ IDEA Ultimate" # this is so
 $silent_config=Join-Path $env:SETUP_PROJ "src\intellij\silent.config"
 $log_file=Join-Path $env:TMP "intellij_install.log"
 
-echo "Installing Intellij ..."
+echo "Installing $tool ..."
 echo "download link: $dl_link"
 echo "installer: $installer"
 echo "download folder: $dl_folder"

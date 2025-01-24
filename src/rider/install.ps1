@@ -6,6 +6,7 @@ param (
     [switch] $skipdownload = $false # Default value is false
 )
 
+$tool="Rider"
 $dl_link="https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.4.exe"
 $installer="ideaIU-latest.exe"
 $dl_folder="$env:TMP"
@@ -14,7 +15,7 @@ $trgt_folder=Join-Path $env:IDES "jetbrains\Rider" # this is somehow sometimes l
 $silent_config=Join-Path $env:SETUP_PROJ "src\rider\silent.config"
 $log_file=Join-Path $env:TMP "rider_install.log"
 
-echo "Installing Rider ..."
+echo "Installing $tool ..."
 echo "download link: $dl_link"
 echo "installer: $installer"
 echo "download folder: $dl_folder"
