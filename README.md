@@ -49,8 +49,12 @@ Failed to install Rider.
 PS C:\development\projects\ReinstallPc> 
 ```   
 
-- ```src/Intellij/install.ps1```
-- ```src/Rider/install.ps1```
+- ```src/intellij/install.ps1```
+- ```src/rider/install.ps1```
+- ```src/jetbrains-toolbox/install.ps1```
+   - kinda meh about this.. installs in appdata
+   - need to configure path to $ides
+- ```src/chrome/install.ps1```
 ---
 ## Shell helper
 
