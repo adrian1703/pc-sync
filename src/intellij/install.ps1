@@ -11,6 +11,7 @@ $installer="ideaIU-latest.exe"
 $dl_folder="$env:TMP"
 $installer_full_path=Join-Path $dl_folder $installer
 $trgt_folder=Join-Path $env:IDES "jetbrains\IntelliJ IDEA Ultimate" # this is somehow sometimes lowercase dont ask me why
+
 $silent_config=Join-Path $env:SETUP_PROJ "src\intellij\silent.config"
 $log_file=Join-Path $env:TMP "intellij_install.log"
 
