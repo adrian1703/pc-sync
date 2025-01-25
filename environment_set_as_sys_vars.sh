@@ -10,4 +10,5 @@ while read var; do
   value="${!var}"
   echo "Setting environment variable: $var_upper=$value"
   setx "$var_upper" "$value"
+  mkdir -p "$value"
 done
