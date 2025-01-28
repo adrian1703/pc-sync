@@ -63,3 +63,23 @@ function Invoke-Download
     echo $result
     return $result
 }
+
+function Invoke-Install {
+    param (
+        [Parameter(Mandatory=$true)]
+        [Alias("p")]
+        [string]$installer_path,
+
+        [Parameter(Mandatory=$true)]
+        [Alias("a")]
+        [Array]$cmd_args,
+
+        [Parameter(Mandatory=$false)]
+        [switch] $skipinstall = $false # Default value is false
+    )
+    echo "Executing command: $installer_path $($cmd_args -join ' ')"
+    if(!$skipinstall) {
+        & $installer_path @cmd_args
+    }
+    echo "Done installing. May or may not be successful lol"
+}
