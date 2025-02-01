@@ -7,6 +7,7 @@ alias ll='ls -lah'
 alias cll='clear; ls -lah'
 alias dev='cd $DEV'
 alias proj='cd $DEV/projects'
+alias pc='cd $SETUP_PROJ'
 
 case "$TERM" in
 xterm*)

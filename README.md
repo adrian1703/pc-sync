@@ -15,7 +15,12 @@
 4. check if ides is capitalized
 5. reopen bash (for loading sys vars into the bash context)
 6. nav to the root of this proj
-7. ``./git_config.sh -pull`` for pulling git config
+7. for pulling git config
+    ```bash
+    ./git_config.sh -pull
+    ```
+   
+
 ---
 
 ### Installing common software using powershell
