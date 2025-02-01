@@ -15,7 +15,7 @@ Import-Module ./src/Utils.psm1
 ###################### Config Variables ######################
 $tool      = "Rider"
 $dl_link   = "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.4.exe"
-$installer = "rider_install.exe"
+$installer = $tool + "_install.exe"
 
 $trgt_folder   =Join-Path $env:IDES       "jetbrains\Rider" # this is somehow sometimes lowercase dont ask me why
 $silent_config =Join-Path $env:SETUP_PROJ "src\rider\silent.config"
