@@ -9,49 +9,49 @@ function Invoke-Download
 
         [Parameter(Mandatory = $true, HelpMessage = "Enter the download link")]
         [Alias("dl")]
-        [string] $dl_link,
+        [string] $dlLink,
 
         [Parameter(Mandatory = $true, HelpMessage = "Enter the name the downloaded file should be named")]
         [Alias("in")]
-        [string] $installer,
+        [string] $installerName,
 
     # Optional
         [Parameter(Mandatory = $false, HelpMessage = "Enter the download folder")]
         [Alias("dlf")]
-        [string] $dl_folder = "$env:TMP",
+        [string] $dlFolder = "$env:TMP",
     # Test
         [Parameter(Mandatory = $false)]
-        [switch] $skipdownload = $false # Default value is false
+        [switch] $skipDownload = $false # Default value is false
     )
 
-    $installer_full_path=Join-Path $dl_folder $installer
+    $installerFullPath=Join-Path $dlFolder $installerName
 
     echo "Downloading $tool ..."
-    echo "download link: $dl_link"
-    echo "installer: $installer"
-    echo "download folder: $dl_folder"
-    echo "full: $installer_full_path"
+    echo "download link: $dlLink"
+    echo "installer: $installerName"
+    echo "download folder: $dlFolder"
+    echo "full: $installerFullPath"
 
 
     # Ensure target folder exists
     # mkdir -p "$dl_folder"
-    if (!(Test-Path -Path $dl_folder))
+    if (!(Test-Path -Path $dlFolder))
     {
-        New-Item -ItemType Directory -Path $dl_folder | Out-Null
+        New-Item -ItemType Directory -Path $dlFolder | Out-Null
     }
 
     # Download the installer
-    if (!$skipdownload)
+    if (!$skipDownload)
     {
-        Invoke-WebRequest -Uri $dl_link -OutFile $installer_full_path
+        Invoke-WebRequest -Uri $dlLink -OutFile $installerFullPath
     }
 
     $result = $null
     # Check if download file exists
-    if (Test-Path -Path $installer_full_path) {
+    if (Test-Path -Path $installerFullPath) {
         $result = @{
             Status  = "Success"
-            Path    = $installer_full_path
+            Path    = $installerFullPath
             Message = "Download complete."
         }
     } else {
@@ -68,18 +68,24 @@ function Invoke-Install {
     param (
         [Parameter(Mandatory=$true)]
         [Alias("p")]
-        [string]$installer_path,
+        [string]$installerFullPath,
 
         [Parameter(Mandatory=$true)]
         [Alias("a")]
-        [Array]$cmd_args,
+        [Array]$installArgs,
 
         [Parameter(Mandatory=$false)]
-        [switch] $skipinstall = $false # Default value is false
+        [switch] $skipInstall = $false # Default value is false
     )
-    echo "Executing command: $installer_path $($cmd_args -join ' ')"
-    if(!$skipinstall) {
-        & $installer_path @cmd_args
+    echo "Executing command: $installerFullPath $($installArgs -join ' ')"
+    if(!$skipInstall) {
+        & $installerFullPath @installArgs
     }
     echo "Done installing. May or may not be successful lol"
+}
+
+function Invoke-CompleteInstall {
+    param (
+
+    )
 }

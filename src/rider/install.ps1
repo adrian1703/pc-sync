@@ -10,7 +10,7 @@ param (
 )
 
 ###################### Imports          ######################
-Import-Module ./src/Utils.psm1
+Import-Module ./src/InstallManager.psm1
 
 ###################### Config Variables ######################
 $tool      = "Rider"
