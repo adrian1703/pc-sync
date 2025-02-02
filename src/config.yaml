@@ -12,7 +12,7 @@ schema:
         downloadFolder: "${TMP}"
     installExe:
       definition:
-        function: Invoke-InstallExe
+        function: "Invoke-InstallExe"
         args:
           -fileName
           -fileLocation
@@ -22,7 +22,7 @@ schema:
 
 rider:
   name: "Rider"
-  description: ""
+  description: "Download and install Rider IDE"
   actions:
     download:
       fileName: "install.exe"
