@@ -1,91 +1,171 @@
 #! /usr/bin/env pwsh
+
+
 function Invoke-Download
 {
     param (
     # Mandatory
-        [Parameter(Mandatory = $true, HelpMessage = "Enter the tool name")]
-        [Alias("t")]
-        [string] $tool,
-
         [Parameter(Mandatory = $true, HelpMessage = "Enter the download link")]
         [Alias("dl")]
-        [string] $dlLink,
-
-        [Parameter(Mandatory = $true, HelpMessage = "Enter the name the downloaded file should be named")]
-        [Alias("in")]
-        [string] $installerName,
-
-    # Optional
-        [Parameter(Mandatory = $false, HelpMessage = "Enter the download folder")]
-        [Alias("dlf")]
-        [string] $dlFolder = "$env:TMP",
-    # Test
-        [Parameter(Mandatory = $false)]
-        [switch] $skipDownload = $false # Default value is false
+        [string] $link
+    ,
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the download filename")]
+        [Alias("fn")]
+        [string] $fileName
+    ,
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the download folder")]
+        [Alias("df")]
+        [string] $downloadFolder = "$env:TMP"
     )
 
-    $installerFullPath=Join-Path $dlFolder $installerName
+    if ($fileName -eq $null)
+    {
+        $fileName = Split-Path -Path $link -Leaf
+    }
+    $fullPath = Join-Path $downloadFolder $fileName
 
-    echo "Downloading $tool ..."
-    echo "download link: $dlLink"
-    echo "installer: $installerName"
-    echo "download folder: $dlFolder"
-    echo "full: $installerFullPath"
+    Write-Host "Download link: $link"
+    Write-Host "Download folder: $downloadFolder"
+    Write-Host "Full file path: $fullPath"
 
 
     # Ensure target folder exists
-    # mkdir -p "$dl_folder"
-    if (!(Test-Path -Path $dlFolder))
+    if (!(Test-Path -Path $downloadFolder))
     {
-        New-Item -ItemType Directory -Path $dlFolder | Out-Null
+        New-Item -ItemType Directory -Path $downloadFolder | Out-Null
+    }
+    # delete file if exists
+    if (Test-Path -Path $fullPath)
+    {
+        Write-Host "Existing file found at $fullPath, removing it."
+        Remove-Item -Path $fullPath -Force
+    }
+    # init
+    $result = @{
+        Status = "Error"
+        Path = $fullPath
+        Message = "Download failed; the file was not found at the specified path."
     }
 
-    # Download the installer
-    if (!$skipDownload)
+    # Attempt to download the file
+    try
     {
-        Invoke-WebRequest -Uri $dlLink -OutFile $installerFullPath
-    }
-
-    $result = $null
-    # Check if download file exists
-    if (Test-Path -Path $installerFullPath) {
+        Write-Host "Attempting to download the file..."
+        Invoke-WebRequest -Uri $link -OutFile $fullPath
         $result = @{
-            Status  = "Success"
-            Path    = $installerFullPath
+            Status = "Success"
+            Path = $fullPath
             Message = "Download complete."
         }
-    } else {
+    }
+    catch
+    {
+        Write-Host "Error during file download: $_"
         $result = @{
-            Status  = "Error"
-            Message = "Download failed."
+            Status = "Error"
+            Path = $fullPath
+            Message = "An error occurred during download: $_"
         }
     }
-    echo $result
+    # Output the final result as both a message and return value
+    Write-Host $result
     return $result
 }
 
-function Invoke-Install {
+
+function Invoke-InstallExe
+{
     param (
-        [Parameter(Mandatory=$true)]
-        [Alias("p")]
-        [string]$installerFullPath,
-
-        [Parameter(Mandatory=$true)]
-        [Alias("a")]
-        [Array]$installArgs,
-
-        [Parameter(Mandatory=$false)]
-        [switch] $skipInstall = $false # Default value is false
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the download filename")]
+        [Alias("fn")]
+        [string] $fileName
+    ,
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the file location")]
+        [Alias("fl")]
+        [string] $fileLocation = "$env:TMP"
+    ,
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the installation args")]
+        [Alias("ia")]
+        [Array]$installArgs
     )
-    echo "Executing command: $installerFullPath $($installArgs -join ' ')"
-    if(!$skipInstall) {
-        & $installerFullPath @installArgs
+    $installerFullPath = Join-Path $fileLocation + $fileName
+    Write-Host "Executing command: $installerFullPath $( $installArgs -join ' ' )"
+    & $installerFullPath @installArgs
+    Write-Host "Done invoking install command. May or may not be successful."
+}
+
+function Start-Actions {
+    param (
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the path to run config yaml")]
+        [Alias("cfp")]
+        [string] $configPath
+    ,
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the execution target")]
+        [Alias("tn")]
+        [string]$targetName
+    ,
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the action of target")]
+        [Alias("ta")]
+        [string]$targetAction
+    )
+
+    $yamlContent   = Get-Content -Raw -Path $configPath
+    $configObject  = ConvertFrom-Yaml -Yaml $yamlContent
+}
+
+function Start-TargetAction {
+    param (
+        [Parameter(HelpMessage = "Enter the path to run config yaml")]
+        [Alias("cfp")]
+        [string] $configPath
+    ,
+        [Parameter(HelpMessage = "Enter the path to run config object")]
+        [Alias("cfo")]
+        [string] $configObject
+    ,
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the execution target")]
+        [Alias("tn")]
+        [string]$targetName
+    ,
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the action of target")]
+        [Alias("an")]
+        [string]$actionName
+    )
+
+    # Validating
+    $configObject = Read-Config $configPath $configObject
+    $targetObject = $configObject.$targetName
+    if ($targetObject -eq $null) {
+        throw "The provided targetName(=$targetName) is not present in configObject."
     }
-    echo "Done installing. May or may not be successful lol"
+    $actionObject = $targetObject.$actionName
+    if ($targetObject -eq $null) {
+        throw "The provided actionName(=$actionName) is not present in targetObject."
+    }
+
+
+
+
 }
 
-function Invoke-CompleteInstall {
+function Read-Config {
     param (
-
+        [Parameter(HelpMessage = "Enter the path to run config yaml")]
+        [Alias("cfp")]
+        [string] $configPath
+    ,
+        [Parameter(HelpMessage = "Enter the path to run config object")]
+        [Alias("cfo")]
+        [string] $configObject
     )
+    if (-not $configObject -and -not $configPath) {
+        throw "You must provide at least one of the following parameters: `-configPath` or `-configObject`."
+    }
+
+    if($configObject -eq $null) {
+        $yamlContent = Get-Content -Raw -Path $configPath
+        return ConvertFrom-Yaml -Yaml $yamlContent
+    }
+    return $configObject
 }
+
