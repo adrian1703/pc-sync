@@ -19,9 +19,12 @@
     ```bash
     ./git_config.sh -pull
     ```
-   
 
 ---
+### Installing software via config
+
+**Prerequisite**: Install yaml module for powershell ``Install-Module -Name powershell-yaml -Scope CurrentUser``
+
 
 ### Installing common software using powershell
 Either call these directly in powershell or execute powershell in
