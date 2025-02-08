@@ -1,6 +1,4 @@
 #! /usr/bin/env pwsh
-
-
 function Invoke-Download
 {
     param (
@@ -94,7 +92,7 @@ function Invoke-InstallExe
     Write-Host "Done invoking install command. May or may not be successful."
 }
 
-function Start-RunAllTargets {
+function Start-RunAllTasks {
     param (
         [Parameter(HelpMessage = "Enter the path to run config yaml")]
         [Alias("cfp")]
@@ -109,16 +107,21 @@ function Start-RunAllTargets {
         [switch] $dry
     )
 
-    $yamlContent   = Get-Content -Raw -Path $configPath
-    $configObject  = ConvertFrom-Yaml -Yaml $yamlContent
-    $targets = $targetObject.actions
-    foreach ($action in $actions)
+    $configObject = Read-Config $configPath $configObject
+    $schema       = $configObject.schema
+    $tasks        = $configObject.tasks
+    $cnt          = 1
+    $total        = $tasks.Count
+    foreach ($task in $tasks)
     {
-        Start-TargetAction -cfo $configObject -tn $targetName -dry:$dry
+        $taskName = task.name
+        Write-Host "Running task $cnt from $total : `t$taskName"
+        Start-RunTaskAllActions -cfo $configObject -tn $taskName -dry:$dry
+        $cnt += 1
     }
 }
 
-function Start-RunTargetAllActions {
+function Start-RunTaskAllActions {
     param (
         [Parameter(HelpMessage = "Enter the path to run config yaml")]
         [Alias("cfp")]
@@ -132,25 +135,36 @@ function Start-RunTargetAllActions {
         [Alias("dry")]
         [switch] $dry
     ,
-        [Parameter(Mandatory = $true, HelpMessage = "Enter the execution target")]
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the execution task")]
         [Alias("tn")]
-        [string]$targetName
+        [string]$taskName
     )
 
-    $yamlContent   = Get-Content -Raw -Path $configPath
-    $configObject  = ConvertFrom-Yaml -Yaml $yamlContent
-    if ($targetObject -eq $null) {
-        throw "The provided targetName(=$targetName) is not present in configObject."
+    $configObject  = Read-Config $configPath $configObject
+    $task          = $null
+    foreach ($item in $configObject.tasks)
+    {
+        if ($taskName -eq $item.name)
+        {
+            $task = $item
+            break
+        }
     }
-    $actions = $targetObject.actions
+    if ($task -eq $null) {
+        throw "The provided taskName(=$taskName) is not present in configObject."
+    }
+    $actions = $task.actions
+    $cnt     = 1
+    $total   = $actions.Count
     foreach ($action in $actions)
     {
-        $actionName = $action.Keys
-        Start-TargetAction -cfo $configObject -tn $targetName -dry:$dry
+        $actionName = $action.cmd
+        Write-Host "Running action $cnt from $total : `t${action.name}"
+        Start-RunTaskAction -cfo $configObject -tn $taskName -an $actionName -dry:$dry
     }
 }
 
-function Start-RunTargetAction {
+function Start-RunTaskAction {
     param (
         [Parameter(HelpMessage = "Enter the path to run config yaml")]
         [Alias("cfp")]
@@ -164,24 +178,24 @@ function Start-RunTargetAction {
         [Alias("dry")]
         [switch] $dry
     ,
-        [Parameter(Mandatory = $true, HelpMessage = "Enter the execution target")]
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the execution task")]
         [Alias("tn")]
-        [string]$targetName
+        [string]$taskName
     ,
-        [Parameter(Mandatory = $true, HelpMessage = "Enter the action of target")]
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the action of task")]
         [Alias("an")]
         [string]$actionName
     )
 
     # Validating
     $configObject = Read-Config $configPath $configObject
-    $targetObject = $configObject.$targetName
-    if ($targetObject -eq $null) {
-        throw "The provided targetName(=$targetName) is not present in configObject."
+    $taskObject = $configObject.$taskName
+    if ($taskObject -eq $null) {
+        throw "The provided taskName(=$taskName) is not present in configObject."
     }
-    $actionObject = $targetObject.$actionName
-    if ($targetObject -eq $null) {
-        throw "The provided actionName(=$actionName) is not present in targetObject."
+    $actionObject = $taskObject.$actionName
+    if ($taskObject -eq $null) {
+        throw "The provided actionName(=$actionName) is not present in taskObject."
     }
 
 
