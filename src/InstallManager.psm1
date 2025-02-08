@@ -206,8 +206,24 @@ function Read-Config {
 
     if($configObject -eq $null) {
         $yamlContent = Get-Content -Raw -Path $configPath
+        $yamlContent = Replace-EnvVarsPlaceholders -in $yamlContent
         return ConvertFrom-Yaml -Yaml $yamlContent
     }
     return $configObject
 }
+
+function Replace-EnvVarsPlaceholders {
+    param (
+        [Parameter(Mandatory = $true)]
+        [alias("in")]
+        [string]$inputString
+    )
+    $result = [regex]::replace($InputString, '\$\{(.*?)\}', {
+        param($match)
+        $envVarName = $match.Groups[1].Value
+        return [System.Environment]::GetEnvironmentVariable($envVarName)
+    })
+    return $result
+}
+
 
