@@ -94,26 +94,7 @@ function Invoke-InstallExe
     Write-Host "Done invoking install command. May or may not be successful."
 }
 
-function Start-Actions {
-    param (
-        [Parameter(Mandatory = $true, HelpMessage = "Enter the path to run config yaml")]
-        [Alias("cfp")]
-        [string] $configPath
-    ,
-        [Parameter(Mandatory = $true, HelpMessage = "Enter the execution target")]
-        [Alias("tn")]
-        [string]$targetName
-    ,
-        [Parameter(Mandatory = $true, HelpMessage = "Enter the action of target")]
-        [Alias("ta")]
-        [string]$targetAction
-    )
-
-    $yamlContent   = Get-Content -Raw -Path $configPath
-    $configObject  = ConvertFrom-Yaml -Yaml $yamlContent
-}
-
-function Start-TargetAction {
+function Start-RunAllTargets {
     param (
         [Parameter(HelpMessage = "Enter the path to run config yaml")]
         [Alias("cfp")]
@@ -122,6 +103,66 @@ function Start-TargetAction {
         [Parameter(HelpMessage = "Enter the path to run config object")]
         [Alias("cfo")]
         [string] $configObject
+    ,
+        [Parameter(HelpMessage = "Test Flag; Set to not execute.")]
+        [Alias("dry")]
+        [switch] $dry
+    )
+
+    $yamlContent   = Get-Content -Raw -Path $configPath
+    $configObject  = ConvertFrom-Yaml -Yaml $yamlContent
+    $targets = $targetObject.actions
+    foreach ($action in $actions)
+    {
+        Start-TargetAction -cfo $configObject -tn $targetName -dry:$dry
+    }
+}
+
+function Start-RunTargetAllActions {
+    param (
+        [Parameter(HelpMessage = "Enter the path to run config yaml")]
+        [Alias("cfp")]
+        [string] $configPath
+    ,
+        [Parameter(HelpMessage = "Enter the path to run config object")]
+        [Alias("cfo")]
+        [string] $configObject
+    ,
+        [Parameter(HelpMessage = "Test Flag; Set to not execute.")]
+        [Alias("dry")]
+        [switch] $dry
+    ,
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the execution target")]
+        [Alias("tn")]
+        [string]$targetName
+    )
+
+    $yamlContent   = Get-Content -Raw -Path $configPath
+    $configObject  = ConvertFrom-Yaml -Yaml $yamlContent
+    if ($targetObject -eq $null) {
+        throw "The provided targetName(=$targetName) is not present in configObject."
+    }
+    $actions = $targetObject.actions
+    foreach ($action in $actions)
+    {
+        $actionName = $action.Keys
+        Start-TargetAction -cfo $configObject -tn $targetName -dry:$dry
+    }
+}
+
+function Start-RunTargetAction {
+    param (
+        [Parameter(HelpMessage = "Enter the path to run config yaml")]
+        [Alias("cfp")]
+        [string] $configPath
+    ,
+        [Parameter(HelpMessage = "Enter the path to run config object")]
+        [Alias("cfo")]
+        [string] $configObject
+    ,
+        [Parameter(HelpMessage = "Test Flag; Set to not execute.")]
+        [Alias("dry")]
+        [switch] $dry
     ,
         [Parameter(Mandatory = $true, HelpMessage = "Enter the execution target")]
         [Alias("tn")]
@@ -142,6 +183,7 @@ function Start-TargetAction {
     if ($targetObject -eq $null) {
         throw "The provided actionName(=$actionName) is not present in targetObject."
     }
+
 
 
 
