@@ -100,7 +100,7 @@ function Start-RunAllTasks {
     ,
         [Parameter(HelpMessage = "Enter the run config as parsed object")]
         [Alias("cfo")]
-        [string] $config
+        [Object] $config
     ,
         [Parameter(HelpMessage = "Test Flag; Set to not execute.")]
         [Alias("dry")]
@@ -129,7 +129,7 @@ function Start-RunTaskAllActions {
     ,
         [Parameter(HelpMessage = "Enter the run config as parsed object")]
         [Alias("cfo")]
-        [string] $config
+        [Object] $config
     ,
         [Parameter(HelpMessage = "Test Flag; Set to not execute.")]
         [Alias("dry")]
@@ -150,7 +150,8 @@ function Start-RunTaskAllActions {
             break
         }
     }
-    if ($task -eq $null) {
+    if ($task -eq $null)
+    {
         throw "The provided taskName(=$taskName) is not present in config."
     }
     $actions = $task.actions
@@ -172,7 +173,7 @@ function Start-RunTaskAction {
     ,
         [Parameter(HelpMessage = "Enter the run config as parsed object")]
         [Alias("cfo")]
-        [string] $config
+        [Object] $config
     ,
         [Parameter(HelpMessage = "Test Flag; Set to not execute.")]
         [Alias("dry")]
@@ -189,35 +190,75 @@ function Start-RunTaskAction {
 
     # Validating
     $config = Read-Config $configPath $config
-    $taskObject = $config.$taskName
-    if ($taskObject -eq $null) {
+    $task = $config.$taskName
+    if ($task -eq $null)
+    {
         throw "The provided taskName(=$taskName) is not present in config."
     }
-    $actionObject = $taskObject.$actionName
-    if ($taskObject -eq $null) {
+    $action = $task.$actionName
+    if ($task -eq $null)
+    {
         throw "The provided actionName(=$actionName) is not present in task."
     }
     $actionSchema = $config.schema.$actionName
-    if ($actionSchema -eq $null) {
+    if ($actionSchema -eq $null)
+    {
         throw "The provided actionName(=$actionName) is not present in schema."
     }
 
+    # Gather arguments
+    $exArgs  = Get-ExplicitArgsForAction -ac $action
+    $deArgs  = Get-DefaultArgsForAction  -as $actionSchema
+    $cmdArgs = $exArgs + $deArgs
+
     # Execution
-
-
-
+    $cmdName = $actionSchema.definition.function
+    if (-not $dry)
+    {
+        Write-Host "Running: $cmdName @($cmdArgs -join ' ')"
+        & $cmdName @cmdArgs
+    }
+    else
+    {
+        Write-Host "Dry run: $cmdName @($cmdArgs -join ' ')"
+    }
 }
 
 
 
-function Get-ExplicitArgs {
+function Get-ExplicitArgsForAction
+{
     param (
-        [Parameter(HelpMessage = "Enter the task-object")]
-        [Alias("tk")]
-        [string] $task
+        [Parameter(HelpMessage = "Enter the action-task-object")]
+        [Alias("ac")]
+        [Object] $action
     )
+    $args = @()
+    foreach ($key in $action.args.Keys)
+    {
+        $value = $action.args.$key
+        $args += "/$key=$value"
+    }
+    return $args
+}
 
-
+function Get-DefaultArgsForAction {
+    param (
+        [Parameter(HelpMessage = "Enter the action-schema object")]
+        [Alias("as")]
+        [Object] $actionSchema
+    )
+    $args = @()
+    if ($actionSchema -eq $null)
+    {
+        return $args
+    }
+    foreach ($key in $actionSchema.defaults.Keys)
+    {
+        $value = $actionSchema.args.$key
+        $args += "/$key=$value"
+    }
+    return $args
 }
 
 function Read-Config {
@@ -230,11 +271,13 @@ function Read-Config {
         [Alias("cfo")]
         [string] $config
     )
-    if (-not $config -and -not $configPath) {
+    if (-not $config -and -not $configPath)
+    {
         throw "You must provide at least one of the following parameters: `-configPath` or `-config`."
     }
 
-    if($config -eq $null) {
+    if ($config -eq $null)
+    {
         $yamlContent = Get-Content -Raw -Path $configPath
         $yamlContent = Replace-EnvVarsPlaceholders -in $yamlContent
         return ConvertFrom-Yaml -Yaml $yamlContent

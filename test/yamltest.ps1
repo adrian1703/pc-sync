@@ -6,7 +6,7 @@ $yamlContent = [regex]::replace($yamlContent, '\$\{(.*?)\}', {
     $envVarName = $match.Groups[1].Value
     return [System.Environment]::GetEnvironmentVariable($envVarName)
 })
-Write-Host $yamlContent
+# Write-Host $yamlContent
 # Convert YAML to PowerShell object
 $parsedData = ConvertFrom-Yaml -Yaml $yamlContent
 
@@ -19,13 +19,22 @@ foreach ($key in $parsedData.Keys)
     Write-Host "$key : $value"
 }
 
-Write-Host $parsedData.rider.Keys
+Write-Host $parsedData.tasks
 
-foreach ($item in $parsedData.schema.stages)
+foreach ($item in $parsedData.tasks)
 {
-    Write-Host $item.name
-    Write-Host $item.prio
+    foreach ($item2 in $item.actions)
+    {
+        Write-Host $item2.Keys
+        Write-Host $item2.args
+        foreach ($item3 in $item2.args)
+        {
+
+            Write-Host 'i'
+            Write-Host $item3.Keys
+
+            return $item3 | Get-Member -MemberType Properties
+        }
+    }
 }
-Write-Host $parsedData.schema.stages
-$parsedData.schema.stages
 
