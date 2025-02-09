@@ -13,7 +13,7 @@ function Invoke-Download
     ,
         [Parameter(Mandatory = $true, HelpMessage = "Enter the download folder")]
         [Alias("df")]
-        [string] $downloadFolder = "$env:TMP"
+        [string] $downloadFolder
     )
 
     if ($fileName -eq $null)
@@ -80,7 +80,7 @@ function Invoke-InstallExe
     ,
         [Parameter(Mandatory = $true, HelpMessage = "Enter the file location")]
         [Alias("fl")]
-        [string] $fileLocation = "$env:TMP"
+        [string] $fileLocation
     ,
         [Parameter(Mandatory = $true, HelpMessage = "Enter the installation args")]
         [Alias("ia")]
@@ -108,7 +108,6 @@ function Start-RunAllTasks {
     )
 
     $config = Read-Config $configPath $config
-    $schema = $config.schema
     $tasks  = $config.tasks
     $cnt    = 1
     $total  = $tasks.Count
@@ -233,13 +232,13 @@ function Get-ExplicitArgsForAction
         [Alias("ac")]
         [Object] $action
     )
-    $args = @()
+    $exArgs = @()
     foreach ($key in $action.args.Keys)
     {
         $value = $action.args.$key
-        $args += "/$key=$value"
+        $exArgs += "/$key=$value"
     }
-    return $args
+    return $exArgs
 }
 
 function Get-DefaultArgsForAction {
@@ -248,17 +247,17 @@ function Get-DefaultArgsForAction {
         [Alias("as")]
         [Object] $actionSchema
     )
-    $args = @()
+    $deArgs = @()
     if ($actionSchema -eq $null)
     {
-        return $args
+        return $deArgs
     }
     foreach ($key in $actionSchema.defaults.Keys)
     {
         $value = $actionSchema.args.$key
-        $args += "/$key=$value"
+        $deArgs += "/$key=$value"
     }
-    return $args
+    return $deArgs
 }
 
 function Read-Config {
