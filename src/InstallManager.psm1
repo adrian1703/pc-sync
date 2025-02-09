@@ -108,10 +108,10 @@ function Start-RunAllTasks {
     )
 
     $config = Read-Config $configPath $config
-    $schema       = $config.schema
-    $tasks        = $config.tasks
-    $cnt          = 1
-    $total        = $tasks.Count
+    $schema = $config.schema
+    $tasks  = $config.tasks
+    $cnt    = 1
+    $total  = $tasks.Count
     foreach ($task in $tasks)
     {
         $taskName = task.name
@@ -140,8 +140,8 @@ function Start-RunTaskAllActions {
         [string]$taskName
     )
 
-    $config  = Read-Config $configPath $config
-    $task          = $null
+    $config = Read-Config $configPath $config
+    $task   = $null
     foreach ($item in $config.tasks)
     {
         if ($taskName -eq $item.name)
@@ -190,7 +190,7 @@ function Start-RunTaskAction {
 
     # Validating
     $config = Read-Config $configPath $config
-    $task = $config.$taskName
+    $task   = $config.$taskName
     if ($task -eq $null)
     {
         throw "The provided taskName(=$taskName) is not present in config."
@@ -285,7 +285,7 @@ function Read-Config {
     return $config
 }
 
-function Replace-EnvVarsPlaceholders {
+function Get-EnvVars {
     param (
         [Parameter(Mandatory = $true)]
         [alias("in")]
