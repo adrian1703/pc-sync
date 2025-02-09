@@ -98,25 +98,25 @@ function Start-RunAllTasks {
         [Alias("cfp")]
         [string] $configPath
     ,
-        [Parameter(HelpMessage = "Enter the path to run config object")]
+        [Parameter(HelpMessage = "Enter the run config as parsed object")]
         [Alias("cfo")]
-        [string] $configObject
+        [string] $config
     ,
         [Parameter(HelpMessage = "Test Flag; Set to not execute.")]
         [Alias("dry")]
         [switch] $dry
     )
 
-    $configObject = Read-Config $configPath $configObject
-    $schema       = $configObject.schema
-    $tasks        = $configObject.tasks
+    $config = Read-Config $configPath $config
+    $schema       = $config.schema
+    $tasks        = $config.tasks
     $cnt          = 1
     $total        = $tasks.Count
     foreach ($task in $tasks)
     {
         $taskName = task.name
         Write-Host "Running task $cnt from $total : `t$taskName"
-        Start-RunTaskAllActions -cfo $configObject -tn $taskName -dry:$dry
+        Start-RunTaskAllActions -cfo $config -tn $taskName -dry:$dry
         $cnt += 1
     }
 }
@@ -127,9 +127,9 @@ function Start-RunTaskAllActions {
         [Alias("cfp")]
         [string] $configPath
     ,
-        [Parameter(HelpMessage = "Enter the path to run config object")]
+        [Parameter(HelpMessage = "Enter the run config as parsed object")]
         [Alias("cfo")]
-        [string] $configObject
+        [string] $config
     ,
         [Parameter(HelpMessage = "Test Flag; Set to not execute.")]
         [Alias("dry")]
@@ -140,9 +140,9 @@ function Start-RunTaskAllActions {
         [string]$taskName
     )
 
-    $configObject  = Read-Config $configPath $configObject
+    $config  = Read-Config $configPath $config
     $task          = $null
-    foreach ($item in $configObject.tasks)
+    foreach ($item in $config.tasks)
     {
         if ($taskName -eq $item.name)
         {
@@ -151,7 +151,7 @@ function Start-RunTaskAllActions {
         }
     }
     if ($task -eq $null) {
-        throw "The provided taskName(=$taskName) is not present in configObject."
+        throw "The provided taskName(=$taskName) is not present in config."
     }
     $actions = $task.actions
     $cnt     = 1
@@ -160,7 +160,7 @@ function Start-RunTaskAllActions {
     {
         $actionName = $action.cmd
         Write-Host "Running action $cnt from $total : `t${action.name}"
-        Start-RunTaskAction -cfo $configObject -tn $taskName -an $actionName -dry:$dry
+        Start-RunTaskAction -cfo $config -tn $taskName -an $actionName -dry:$dry
     }
 }
 
@@ -170,9 +170,9 @@ function Start-RunTaskAction {
         [Alias("cfp")]
         [string] $configPath
     ,
-        [Parameter(HelpMessage = "Enter the path to run config object")]
+        [Parameter(HelpMessage = "Enter the run config as parsed object")]
         [Alias("cfo")]
-        [string] $configObject
+        [string] $config
     ,
         [Parameter(HelpMessage = "Test Flag; Set to not execute.")]
         [Alias("dry")]
@@ -188,18 +188,34 @@ function Start-RunTaskAction {
     )
 
     # Validating
-    $configObject = Read-Config $configPath $configObject
-    $taskObject = $configObject.$taskName
+    $config = Read-Config $configPath $config
+    $taskObject = $config.$taskName
     if ($taskObject -eq $null) {
-        throw "The provided taskName(=$taskName) is not present in configObject."
+        throw "The provided taskName(=$taskName) is not present in config."
     }
     $actionObject = $taskObject.$actionName
     if ($taskObject -eq $null) {
-        throw "The provided actionName(=$actionName) is not present in taskObject."
+        throw "The provided actionName(=$actionName) is not present in task."
+    }
+    $actionSchema = $config.schema.$actionName
+    if ($actionSchema -eq $null) {
+        throw "The provided actionName(=$actionName) is not present in schema."
     }
 
+    # Execution
 
 
+
+}
+
+
+
+function Get-ExplicitArgs {
+    param (
+        [Parameter(HelpMessage = "Enter the task-object")]
+        [Alias("tk")]
+        [string] $task
+    )
 
 
 }
@@ -210,20 +226,20 @@ function Read-Config {
         [Alias("cfp")]
         [string] $configPath
     ,
-        [Parameter(HelpMessage = "Enter the path to run config object")]
+        [Parameter(HelpMessage = "Enter the run config as parsed object")]
         [Alias("cfo")]
-        [string] $configObject
+        [string] $config
     )
-    if (-not $configObject -and -not $configPath) {
-        throw "You must provide at least one of the following parameters: `-configPath` or `-configObject`."
+    if (-not $config -and -not $configPath) {
+        throw "You must provide at least one of the following parameters: `-configPath` or `-config`."
     }
 
-    if($configObject -eq $null) {
+    if($config -eq $null) {
         $yamlContent = Get-Content -Raw -Path $configPath
         $yamlContent = Replace-EnvVarsPlaceholders -in $yamlContent
         return ConvertFrom-Yaml -Yaml $yamlContent
     }
-    return $configObject
+    return $config
 }
 
 function Replace-EnvVarsPlaceholders {
