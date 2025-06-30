@@ -9,10 +9,8 @@ Settings - keyboard - custom keybinds
 - rebind switch app window to alt tab
 - rm all in home but downloads
 
-
-# install hyprland
-sudo dnf copr enable solopasha/hyprland
-
+## jetbrains toolbox
+https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.6.3.43718.tar.gz
 
 ## Packages
 
