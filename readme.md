@@ -9,6 +9,9 @@ Settings - keyboard - custom keybinds
 - rebind switch app window to alt tab
 - rm all in home but downloads
 
+## git config
+globale gitconfig anpassen oder symlink maybe
+
 ## jetbrains toolbox
 https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.6.3.43718.tar.gz
 
