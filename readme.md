@@ -11,7 +11,7 @@ Settings - keyboard - custom keybinds
 
 ## git config
 globale gitconfig anpassen oder symlink maybe
-
+-> resolved with stow _ braucht aber noch setupscript
 ## jetbrains toolbox
 https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.6.3.43718.tar.gz
 

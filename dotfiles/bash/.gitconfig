@@ -1,0 +1,17 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Adrian
+	email = adrian.kuhn97@gmail.com
+[core]
+	autocrlf = input
+	editor = nvim
+[fetch]
+	prune = true
+[init]
+	defaultBranch = main
+[alias]
+	sw = switch
+	cm = commit -m
+	br = branch
+[push]
+	autoSetupRemote = true

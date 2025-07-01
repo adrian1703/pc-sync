@@ -6,6 +6,7 @@ to_install=(
 	xclip
 	akmod-nvidia akmods kernel-devel kernel-headers # nvidia schenanigans
 	stow
+	zsh
 )
 for pkg in "${to_install[@]}"; do
 	if rpm -q "$pkg" &> /dev/null; then
