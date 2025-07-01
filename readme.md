@@ -12,11 +12,14 @@ Settings - keyboard - custom keybinds
 ## git config
 globale gitconfig anpassen oder symlink maybe
 -> resolved with stow _ braucht aber noch setupscript
+done
+
 ## jetbrains toolbox
 https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.6.3.43718.tar.gz
 
 ## Packages
 
-- nvim
-- chrome - requires enabling the repo under: /etc/yum.repo.d/google-chrome.repo
-- xclip
+- some packages are in installSoftware for dnf
+- starship manually, thoughts: maybe via brew is better
+    - curl -sS https://starship.rs/install.sh | sh
+- 

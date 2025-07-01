@@ -12,6 +12,8 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+eval "$(starship init zsh)"
+
 # Auto suggestion
 bindkey '^w' autosuggest-execute
 bindkey '^e' autosuggest-accept
