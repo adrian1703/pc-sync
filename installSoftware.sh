@@ -11,7 +11,7 @@ for pkg in "${to_install[@]}"; do
 	if rpm -q "$pkg" &> /dev/null; then
 		echo "✔ $pkg is already installed"
 	else		
-		echo "Installing $pkg ..."
+		echo "➕ Installing $pkg ..."
 		sudo dnf install -y "$pkg" 
 	fi
 done
