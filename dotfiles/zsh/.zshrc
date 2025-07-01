@@ -13,6 +13,7 @@ compinit
 # End of lines added by compinstall
 
 eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.starship.toml
 
 # Auto suggestion
 bindkey '^w' autosuggest-execute
@@ -38,6 +39,8 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
+alias cr="cd -"
+alias ch="cd ~"
 
 # Docker
 alias dco="docker compose"
