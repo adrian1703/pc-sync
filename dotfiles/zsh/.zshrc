@@ -34,11 +34,11 @@ alias l='ls -lh --color=auto'
 alias lt="tree -C -L 2"
 
 # Dirs
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
+alias ..="cd .. && l"
+alias ...="cd ../.. && l"
+alias ....="cd ../../.. && l"
+alias .....="cd ../../../.. && l"
+alias ......="cd ../../../../.. && l"
 alias cr="cd - && l"
 alias ch="cd ~ && l"
 
