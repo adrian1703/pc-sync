@@ -39,8 +39,8 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
-alias cr="cd -"
-alias ch="cd ~"
+alias cr="cd - && l"
+alias ch="cd ~ && l"
 
 # Docker
 alias dco="docker compose"
