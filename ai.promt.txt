@@ -1,0 +1,32 @@
+Follow Conventional Commits with this format:
+
+<type>[optional scope]: <description>
+
+[optional body]
+
+Allowed Types
+minor: Minor changes to existing features logic (couple lines)
+feat: New features; if adjustments are small prefer minor tag
+log: Changes to logging
+fix: Bug fixes
+docs: Documentation updates
+refactor: Code restructuring (no fixes/features)
+perf: Performance improvements
+test: Adding/fixing tests
+build: Build system/dependency changes
+ci: CI/CD updates
+chore: Non-source changes (e.g., tooling)
+
+Description Rules
+- Imperative, present tense (“add” not “added”)
+- No capitalization or period
+- ≤72 characters, clear and specific
+- Avoid overly verbose descriptions or unnecessary details
+- Write three or four sentences at most for the detailed explanation.
+
+Scope Usage
+- Lowercase, consistent, hyphenated if needed
+- Match project structure (auth, api, utils, deps)
+
+- Don't use ``` and dont quote the entire sentence with `
+- only ` (quote) when referencing methods or objects or variables
