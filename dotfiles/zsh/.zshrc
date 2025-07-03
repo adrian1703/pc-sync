@@ -5,6 +5,16 @@ SAVEHIST=1000
 setopt autocd beep extendedglob nomatch notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
+
+# This gets the actual keycode your terminal sends for Delete and Backspace
+# Press Ctrl-V then the key to check (e.g., Ctrl-V Del might show ^[[3~)
+
+# Common bindings:
+bindkey -M viins '^?' backward-delete-char    # Backspace
+bindkey -M viins '^[[3~' delete-char           # Delete
+bindkey -M vicmd '^?' backward-delete-char     # Backspace in normal mode
+bindkey -M vicmd '^[[3~' delete-char           # Delete in normal mode
+
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/adrian/.zshrc'
 
