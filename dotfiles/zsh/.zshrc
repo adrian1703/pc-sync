@@ -34,13 +34,14 @@ alias l='ls -lh --color=auto'
 alias lt="tree -C -L 2"
 
 # Dirs
-alias ..="cd .. && l"
-alias ...="cd ../.. && l"
-alias ....="cd ../../.. && l"
-alias .....="cd ../../../.. && l"
-alias ......="cd ../../../../.. && l"
-alias cr="cd - && l"
-alias ch="cd ~ && l"
+alias cd='cd_func() { builtin cd "$@" && l; }; cd_func'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias cr="cd -"
+alias ch="cd ~"
 
 # Docker
 alias dco="docker compose"
