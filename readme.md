@@ -22,6 +22,9 @@ https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.6.3.43718.tar.gz
 - cant execute script twice
 - still need to configure the terminal to use it
 
+## terminals 
+wezterm not working on 125%
+
 ## Packages
 
 - some packages are in installSoftware for dnf
