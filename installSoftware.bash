@@ -8,6 +8,7 @@ to_install=(
   stow
   zsh
   wezterm
+  kitty
 )
 
 repo_to_activate=(
