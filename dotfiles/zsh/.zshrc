@@ -37,7 +37,8 @@ bindkey '^j' down-line-or-search
 # Programs 
 alias n='nvim'
 alias vim='nvim'
-	
+alias toolbox='~/jetbrains/toolbox/bin/jetbrains-toolbox'
+
 # Ls
 alias ll='ls -lah --color=auto'
 alias l='ls -lh --color=auto'
