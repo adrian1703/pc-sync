@@ -38,6 +38,7 @@ bindkey '^j' down-line-or-search
 alias n='nvim'
 alias vim='nvim'
 alias toolbox='~/jetbrains/toolbox/bin/jetbrains-toolbox'
+alias ts3='/opt/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
 
 # Ls
 alias ll='ls -lah --color=auto'
