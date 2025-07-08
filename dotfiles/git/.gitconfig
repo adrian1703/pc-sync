@@ -1,7 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
 	name = Adrian
-	email = adrian.kuhn97@gmail.com
+	email = adrian.kuhn@arcor.de
 [core]
 	autocrlf = input
 	editor = nvim
