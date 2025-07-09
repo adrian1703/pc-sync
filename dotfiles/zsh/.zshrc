@@ -33,13 +33,12 @@ bindkey '^L' vi-forward-word
 bindkey '^k' up-line-or-search
 bindkey '^j' down-line-or-search
 
-
 # Programs 
 alias n='nvim'
 alias vim='nvim'
 alias toolbox='~/jetbrains/toolbox/bin/jetbrains-toolbox'
 alias ts3='/opt/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
-
+alias work='xfreerdp /run/media/adrian/Stick/arbeit.rdp /f /smart-sizing:3440x1440 /scale-desktop:125'
 # Ls
 alias ll='ls -lah --color=auto'
 alias l='ls -lh --color=auto'
