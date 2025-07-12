@@ -5,16 +5,16 @@ Follow Conventional Commits with this format:
 [optional body]
 
 Allowed Types
-minor: Minor changes to existing features logic (couple lines)
-feat: New features; if adjustments are small prefer minor tag
-log: Changes to logging
-fix: Bug fixes
-docs: Documentation updates
-refactor: Code restructuring (no fixes/features)
-perf: Performance improvements
-test: Adding/fixing tests
+minor: Minor changes to existing features (couple lines)
+feat-: New features; if adjustments are small prefer minor tag
+logs-: Changes to logging
+fix--: Bug fixes
+docs-: Documentation updates
+refac: Code restructuring (no fixes/features)
+perf-: Performance improvements
+tests: Adding/fixing tests
 build: Build system/dependency changes
-ci: CI/CD updates
+cicd-: CI/CD updates
 chore: Non-source changes (e.g., tooling)
 
 Description Rules
