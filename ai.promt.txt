@@ -5,17 +5,17 @@ Follow Conventional Commits with this format:
 [optional body]
 
 Allowed Types
-minor: Minor changes to existing features (couple lines)
-feat-: New features; if adjustments are small prefer minor tag
-logs-: Changes to logging
-fix--: Bug fixes
-docs-: Documentation updates
-refac: Code restructuring (no fixes/features)
-perf-: Performance improvements
-tests: Adding/fixing tests
-build: Build system/dependency changes
-cicd-: CI/CD updates
-chore: Non-source changes (e.g., tooling)
+minr: Minor changes to existing features (couple lines)
+feat: New features; if adjustments are small prefer minor tag
+logs: Changes to logging
+bugs: Bug fixes
+docs: Documentation updates
+refc: Code restructuring (no fixes/features)
+perf: Performance improvements
+test: Adding/fixing tests
+cicd: CI/CD updates/ build changes
+chor: Non-source changes (e.g., tooling)
+
 
 Description Rules
 - Imperative, present tense (“add” not “added”)
@@ -23,6 +23,7 @@ Description Rules
 - ≤72 characters, clear and specific
 - Avoid overly verbose descriptions or unnecessary details
 - Write three or four sentences at most for the detailed explanation.
+- Enumeration is allowed
 
 Scope Usage
 - Lowercase, consistent, hyphenated if needed
