@@ -18,6 +18,7 @@ configToDestination[nvim]="$HOME/.config/nvim"
 configToDestination[starship]="$HOME"
 configToDestination[wezterm]="$HOME/.config/wezterm"
 configToDestination[intellij]="$HOME"
+configToDestination[tmux]="$HOME/.config/tmux"
 
 for configPkg in "${!configToDestination[@]}"; do
   destination="${configToDestination[$configPkg]}"
