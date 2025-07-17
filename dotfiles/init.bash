@@ -12,13 +12,15 @@ cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 declare -A configToDestination
 configToDestination[git]="$HOME"
-configToDestination[kitty]="$HOME/.config/kitty"
 configToDestination[zsh]="$HOME"
-configToDestination[nvim]="$HOME/.config/nvim"
 configToDestination[starship]="$HOME"
-configToDestination[wezterm]="$HOME/.config/wezterm"
 configToDestination[intellij]="$HOME"
-configToDestination[tmux]="$HOME/.config/tmux"
+
+declare -A configToDestinationDir
+configToDestinationDir[tmux]="$HOME/.config/tmux"
+configToDestinationDir[wezterm]="$HOME/.config/wezterm"
+configToDestinationDir[nvim]="$HOME/.config/nvim"
+configToDestinationDir[kitty]="$HOME/.config/kitty"
 
 for configPkg in "${!configToDestination[@]}"; do
   destination="${configToDestination[$configPkg]}"
@@ -29,6 +31,18 @@ for configPkg in "${!configToDestination[@]}"; do
   else
     echo "deleting symlink for $configPkg at $destination"
     stow -D -t "$destination" "$configPkg"
-    rmdir "$destination"
+  fi
+done
+
+for configPkg in "${!configToDestinationDir[@]}"; do
+  destination="${configToDestinationDir[$configPkg]}"
+  if ! $delete_flag; then
+    echo "creating symlink for $configPkg at $destination"
+    mkdir -p "$destination"
+    stow -t "$destination" "$configPkg"
+  else
+    echo "deleting symlink for $configPkg at $destination"
+    stow -D -t "$destination" "$configPkg"
+    rm -r "$destination"
   fi
 done
