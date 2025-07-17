@@ -9,6 +9,8 @@ to_install=(
   zsh
   wezterm
   kitty
+  fd
+  tmux
 )
 
 repo_to_activate=(
