@@ -11,6 +11,7 @@ to_install=(
   kitty
   fd
   tmux
+  lshw
 )
 
 repo_to_activate=(
