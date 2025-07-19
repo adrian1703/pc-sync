@@ -90,3 +90,6 @@ alias gs='git switch'
 
 export LANG=en_US.UTF-8
 
+
+# Created by `pipx` on 2025-07-19 10:43:40
+export PATH="$PATH:/home/adrian/.local/bin"

@@ -12,6 +12,7 @@ to_install=(
   fd
   tmux
   lshw
+  python3-pip
 )
 
 repo_to_activate=(
