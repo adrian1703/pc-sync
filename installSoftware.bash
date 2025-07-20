@@ -13,6 +13,8 @@ to_install=(
   tmux
   lshw
   python3-pip
+  podman
+  podman-compose
 )
 
 repo_to_activate=(
