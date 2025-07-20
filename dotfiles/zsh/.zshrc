@@ -41,6 +41,10 @@ alias ts3='/opt/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
 alias work='xfreerdp /run/media/adrian/Stick/arbeit.rdp /f /smart-sizing:3440x1440 /scale-desktop:125'
 alias zeit='n /run/media/adrian/Stick/zeit.txt'
 
+alias ollama-up='podman-compose -f ~/pc-sync/ollama/docker-compose.yml up -d'
+alias ollama-down='podman-compose -f ~/pc-sync/ollama/docker-compose.yml down'
+alias ollama-logs='podman logs -f ollama'
+
 # Misc 
 alias cl=clear 
 
