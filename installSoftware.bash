@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.17.8-1
+
 to_install=(
   neovim
   google-chrome-stable
@@ -15,6 +17,10 @@ to_install=(
   python3-pip
   podman
   podman-compose
+  nvidia-container-toolkit-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
+  nvidia-container-toolkit-base-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
+  libnvidia-container-tools-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
+  libnvidia-container1-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
 )
 
 repo_to_activate=(
@@ -29,6 +35,15 @@ for repo in "${repo_to_activate[@]}"; do
     echo "✔ COPR repo $repo already enabled"
   fi
 done
+
+# Add NVIDIA container repo if not already present
+if [[ ! -f /etc/yum.repos.d/nvidia-container-toolkit.repo ]]; then
+  echo "➕ Adding NVIDIA container repo ..."
+  curl -s -L https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo |
+    sudo tee /etc/yum.repos.d/nvidia-container-toolkit.repo >/dev/null
+else
+  echo "✔ NVIDIA container repo already exists"
+fi
 
 # Install packages
 for pkg in "${to_install[@]}"; do
