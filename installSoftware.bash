@@ -8,6 +8,7 @@ to_install=(
   xclip
   akmod-nvidia akmods kernel-devel kernel-headers # nvidia schenanigans
   stow
+  starship
   zsh
   wezterm
   kitty
@@ -25,6 +26,7 @@ to_install=(
 
 repo_to_activate=(
   wezfurlong/wezterm-nightly
+  atim/starship
 )
 # Enable COPR repos if not already enabled
 for repo in "${repo_to_activate[@]}"; do
