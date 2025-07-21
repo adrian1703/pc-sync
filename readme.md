@@ -9,18 +9,12 @@ Settings - keyboard - custom keybinds
 - rebind switch app window to alt tab
 - rm all in home but downloads
 
-## git config
-globale gitconfig anpassen oder symlink maybe
--> resolved with stow _ braucht aber noch setupscript
-done
 
 ## jetbrains toolbox
 https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.6.3.43718.tar.gz
 
-## fonts 
-- jetbrains mono single install; manually
-- cant execute script twice
-- still need to configure the terminal to use it
+## nvidia podman gpu support
+
 
 ## terminals 
 wezterm not working on 125%
@@ -28,6 +22,3 @@ wezterm not working on 125%
 ## Packages
 
 - some packages are in installSoftware for dnf
-- starship manually, thoughts: maybe via brew is better
-    - curl -sS https://starship.rs/install.sh | sh
-- 
