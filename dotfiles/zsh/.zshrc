@@ -40,10 +40,17 @@ alias toolbox='~/jetbrains/toolbox/bin/jetbrains-toolbox'
 alias ts3='/opt/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
 alias work='xfreerdp /run/media/adrian/Stick/arbeit.rdp /f /smart-sizing:3440x1440 /scale-desktop:125'
 alias zeit='n /run/media/adrian/Stick/zeit.txt'
+alias docker='podman'
 
-alias ollama-up='podman-compose -f ~/pc-sync/ollama/docker-compose.yml up -d'
-alias ollama-down='podman-compose -f ~/pc-sync/ollama/docker-compose.yml down'
-alias ollama-logs='podman logs -f ollama'
+alias ollama-up='\
+  sudo podman podman run -d \                                                                                     main[!]
+  --name ollama \
+  -p 11434:11434 \
+  --gpus all \
+  -v ollama_data:/root/.ollama \
+  ollama/ollama'
+alias ollama-down='sudo podman rm -f ollama'
+alias ollama-logs='sudo podman logs -f ollama'
 
 # Misc 
 alias cl=clear 
@@ -64,11 +71,17 @@ alias cr="cd -"
 alias ch="cd ~"
 
 # Docker
-alias dco="docker compose"
-alias dps="docker ps"
-alias dpa="docker ps -a"
-alias dl="docker ps -l -q"
-alias dx="docker exec -it"
+# alias dco="docker compose"
+# alias dps="docker ps"
+# alias dpa="docker ps -a"
+# alias dl="docker ps -l -q"
+# alias dx="docker exec -it"
+
+alias dco="podman compose"
+alias dps="podman ps"
+alias dpa="podman ps -a"
+alias dl="podman ps -l -q"
+alias dx="podman exec -it"
 
 # Git
 alias gc="git commit -m"
