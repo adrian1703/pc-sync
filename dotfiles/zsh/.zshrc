@@ -33,7 +33,8 @@ bindkey '^L' vi-forward-word
 bindkey '^k' up-line-or-search
 bindkey '^j' down-line-or-search
 
-# Programs 
+# Programs
+alias reload='source ~/.zshrc'
 alias n='nvim'
 alias vim='nvim'
 alias toolbox='~/jetbrains/toolbox/bin/jetbrains-toolbox'
@@ -42,8 +43,7 @@ alias work='xfreerdp /run/media/adrian/Stick/arbeit.rdp /f /smart-sizing:3440x14
 alias zeit='n /run/media/adrian/Stick/zeit.txt'
 alias docker='podman'
 
-alias ollama-up='\
-  sudo podman podman run -d \                                                                                     main[!]
+alias ollama-up='sudo podman run -d \
   --name ollama \
   -p 11434:11434 \
   --gpus all \
