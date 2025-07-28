@@ -41,7 +41,6 @@ alias toolbox='~/jetbrains/toolbox/bin/jetbrains-toolbox'
 alias ts3='/opt/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
 alias work='xfreerdp /run/media/adrian/Stick/arbeit.rdp /f /smart-sizing:3440x1440 /scale-desktop:125'
 alias zeit='n /run/media/adrian/Stick/zeit.txt'
-alias docker='podman'
 alias ask='llm -m d'
 
 
@@ -85,17 +84,18 @@ alias cr="cd -"
 alias ch="cd ~"
 
 # Docker
-# alias dco="docker compose"
-# alias dps="docker ps"
-# alias dpa="docker ps -a"
-# alias dl="docker ps -l -q"
-# alias dx="docker exec -it"
+alias dco="docker compose"
+alias dps="docker ps"
+alias dpa="docker ps -a"
+alias dl="docker ps -l -q"
+alias dx="docker exec -it"
 
-alias dco="podman compose"
-alias dps="podman ps"
-alias dpa="podman ps -a"
-alias dl="podman ps -l -q"
-alias dx="podman exec -it"
+# alias docker='podman'
+# alias dco="podman compose"
+# alias dps="podman ps"
+# alias dpa="podman ps -a"
+# alias dl="podman ps -l -q"
+# alias dx="podman exec -it"
 
 # Git
 alias gc="git commit -m"
@@ -120,7 +120,7 @@ alias gs='git switch'
 # ENV
 
 export LANG=en_US.UTF-8
-
-
+# podman - docker socket 
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
 # Created by `pipx` on 2025-07-19 10:43:40
 export PATH="$PATH:/home/adrian/.local/bin"
