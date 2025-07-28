@@ -90,7 +90,7 @@ alias dpa="docker ps -a"
 alias dl="docker ps -l -q"
 alias dx="docker exec -it"
 
-# alias docker='podman'
+alias docker='podman'
 # alias dco="podman compose"
 # alias dps="podman ps"
 # alias dpa="podman ps -a"
