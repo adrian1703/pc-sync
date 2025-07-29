@@ -25,6 +25,7 @@ to_install=(
   libnvidia-container1-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
   yq   # yaml parser for cli
   glow # markdown renderer
+  pnpm
 )
 
 repo_to_activate=(
