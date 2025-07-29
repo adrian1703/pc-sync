@@ -45,6 +45,7 @@ alias ask='llm -m d'
 
 
 alias oracle-db-up='podman run --name oracle-db \
+  --network bridge \
   -p 1521:1521 -p 5500:5500 \
   -e ORACLE_PWD=Oracle123 \
   -e ORACLE_CHARACTERSET=AL32UTF8 \
