@@ -60,3 +60,5 @@ for pkg in "${to_install[@]}"; do
     sudo dnf install -y "$pkg"
   fi
 done
+
+sudo dnf update
