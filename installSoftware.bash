@@ -61,4 +61,4 @@ for pkg in "${to_install[@]}"; do
   fi
 done
 
-sudo dnf update
+sudo dnf update -y
