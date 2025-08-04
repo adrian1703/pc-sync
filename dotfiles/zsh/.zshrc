@@ -41,8 +41,15 @@ alias toolbox='~/jetbrains/toolbox/bin/jetbrains-toolbox'
 alias ts3='/opt/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
 alias work='xfreerdp /run/media/adrian/Stick/arbeit.rdp /f /smart-sizing:3440x1440 /scale-desktop:125'
 alias zeit='n /run/media/adrian/Stick/zeit.txt'
-alias ask='llm -m d'
 
+ask() {
+  local continue_flag=""
+  if [[ "$1" == "-c" ]]; then
+    continue_flag="-c"
+    shift
+  fi
+  llm -m d $continue_flag "$@" | glow
+}
 
 alias oracle-db-up='podman run --name oracle-db \
   --network bridge \
@@ -86,6 +93,7 @@ alias ch="cd ~"
 
 # Docker
 alias dco="docker compose"
+alias doc="docker compose"
 alias dps="docker ps"
 alias dpa="docker ps -a"
 alias dl="docker ps -l -q"

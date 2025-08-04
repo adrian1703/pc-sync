@@ -9,7 +9,7 @@ vim.api.nvim_set_keymap("n", "SS", ":wa<Enter>", { noremap = false })
 vim.api.nvim_set_keymap("t", "<C-Space>", [[<C-\><C-n>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>t", ":split | terminal<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>T", ":vsplit | terminal<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "<C-v>", "<Esc>v", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<C-v>", "<Esc>lv", { noremap = true, silent = true })
 
 -- vim.api.nvim_set_keymap("n", "tk", ":blast<enter>", { noremap = false })
 -- vim.api.nvim_set_keymap("n", "tj", ":bfirst<enter>", { noremap = false })
