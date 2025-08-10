@@ -26,6 +26,7 @@ to_install=(
   yq   # yaml parser for cli
   glow # markdown renderer
   pnpm
+  yarn
 )
 
 repo_to_activate=(
