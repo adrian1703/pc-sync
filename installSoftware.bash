@@ -27,6 +27,7 @@ to_install=(
   glow # markdown renderer
   pnpm
   yarn
+  thunderbird
 )
 
 repo_to_activate=(
