@@ -28,6 +28,7 @@ to_install=(
   pnpm
   yarn
   thunderbird
+  gh
 )
 
 repo_to_activate=(
