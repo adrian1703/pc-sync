@@ -100,6 +100,7 @@ alias dx="docker exec -it"
 
 
 alias docker='podman'
+alias d='podman'
 # alias dco="podman compose"
 # alias dps="podman ps"
 # alias dpa="podman ps -a"
