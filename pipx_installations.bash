@@ -7,3 +7,4 @@ pipx install llm
 llm install llm-ollama
 pipx install avro-to-python
 pipx inject avro-to-python 'markupsafe<2.1' --force
+pipx install openapi-generator-cli
