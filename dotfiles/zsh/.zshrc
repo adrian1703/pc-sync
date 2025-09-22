@@ -135,3 +135,4 @@ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
 # Created by `pipx` on 2025-07-19 10:43:40
 export PATH="$PATH:/home/adrian/.local/bin"
 export PATH="$HOME/.local/share/pnpm/.tools/pnpm/10.14.0:$PATH"
+export JAVA_HOME="/home/adrian/.jdks/openjdk-24.0.1"

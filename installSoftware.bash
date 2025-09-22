@@ -29,11 +29,14 @@ to_install=(
   yarn
   thunderbird
   gh
+  dnf-plugins-core
+  coolercontrol
 )
 
 repo_to_activate=(
   wezfurlong/wezterm-nightly
   atim/starship
+  codifryed/CoolerControl
 )
 # Enable COPR repos if not already enabled
 for repo in "${repo_to_activate[@]}"; do
