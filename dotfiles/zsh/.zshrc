@@ -37,6 +37,7 @@ bindkey '^j' down-line-or-search
 alias reload='source ~/.zshrc'
 alias n='nvim'
 alias vim='nvim'
+alias t='tmux'
 alias toolbox='~/jetbrains/toolbox/bin/jetbrains-toolbox'
 alias ts3='/opt/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
 alias work='xfreerdp /run/media/adrian/Stick/arbeit.rdp /f /size:3440x1440 /smart-sizing:3440x1440 /scale-desktop:125'
@@ -126,7 +127,7 @@ alias gcoall='git checkout -- .'
 alias gr='git remote'
 alias gre='git reset'
 alias gs='git switch'
-alias ghist=
+alias ghist="git log --graph --decorate --all --pretty=format:'%C(auto)%h%d %C(#888888)(%an; %ar)%Creset %s'"alias graph="git log --graph --decorate --all --pretty=format:'%C(auto)%h%d %C(#888888)(%an; %ar)%Creset %s'"
 
 # ENV
 
