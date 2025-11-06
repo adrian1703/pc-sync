@@ -126,6 +126,7 @@ alias gcoall='git checkout -- .'
 alias gr='git remote'
 alias gre='git reset'
 alias gs='git switch'
+alias ghist=
 
 # ENV
 

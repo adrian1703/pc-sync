@@ -19,10 +19,10 @@ to_install=(
   podman
   podman-compose
   podman-docker
-  nvidia-container-toolkit-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
-  nvidia-container-toolkit-base-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
-  libnvidia-container-tools-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
-  libnvidia-container1-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
+  #nvidia-container-toolkit-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
+  #nvidia-container-toolkit-base-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
+  #libnvidia-container-tools-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
+  #libnvidia-container1-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
   yq   # yaml parser for cli
   glow # markdown renderer
   pnpm
@@ -31,6 +31,8 @@ to_install=(
   gh
   dnf-plugins-core
   coolercontrol
+  dnf-utils
+  google-cloud-cli
 )
 
 repo_to_activate=(
@@ -55,6 +57,21 @@ if [[ ! -f /etc/yum.repos.d/nvidia-container-toolkit.repo ]]; then
     sudo tee /etc/yum.repos.d/nvidia-container-toolkit.repo >/dev/null
 else
   echo "✔ NVIDIA container repo already exists"
+fi
+if [[ ! -f /etc/yum.repos.d/google-cloud-sdk.repo ]]; then
+  echo "➕ Adding google cloud container repo ..."
+  sudo tee -a /etc/yum.repos.d/google-cloud-sdk.repo <<EOM
+[google-cloud-cli]
+name=Google Cloud CLI
+baseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el8-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=0
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+       https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOM
+else
+  echo "✔ google-cloud-cli repo already exists"
 fi
 
 # Install packages
