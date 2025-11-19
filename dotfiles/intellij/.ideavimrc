@@ -2,7 +2,7 @@
 inoremap k( <Esc>
 
 " Map ; to : in normal mode
-nnoremap ; :
+" nnoremap ; :
 
 " Quick save and quit
 nnoremap XX :wq<CR>

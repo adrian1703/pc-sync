@@ -1,0 +1,22 @@
+---java---
+Write me java doc for this $SELECTION; 
+Follow these rules:
+Be Concise Yet Comprehensive
+Use HTML Tags for Formatting
+Document Exceptions with @throws
+DO NOT generate usage example
+Document Overridden Methods only if @Overrides (hint {@inheritDoc})
+Use @link for Cross-Referencing
+When generating only generate the comment doc
+
+---kotlin---
+Follow these rules: 
+Be Concise Yet Comprehensive 
+Use HTML Tags for Formatting 
+Document Exceptions with @throws 
+DO NOT generate usage example 
+Document Overridden Methods only if @Overrides (hint {@inheritDoc}) 
+Use [Class] or [Class.method] for linking to classes
+References can be added with @see
+
+Write KDoc.
