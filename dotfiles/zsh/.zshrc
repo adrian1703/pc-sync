@@ -34,6 +34,7 @@ bindkey '^k' up-line-or-search
 bindkey '^j' down-line-or-search
 
 # Programs
+alias t='tmux'
 alias reload='source ~/.zshrc'
 alias n='nvim'
 alias vim='nvim'
