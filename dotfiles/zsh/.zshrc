@@ -43,6 +43,8 @@ alias toolbox='~/jetbrains/toolbox/bin/jetbrains-toolbox'
 alias ts3='/opt/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
 alias work='xfreerdp /run/media/adrian/Stick/arbeit.rdp /f /size:3440x1440 /smart-sizing:3440x1440 /scale-desktop:125'
 alias zeit='n /run/media/adrian/Stick/zeit.txt'
+alias g='./gradlew'
+alias gclb='./gradlew clean build'
 ask() {
   local continue_flag=""
   if [[ "$1" == "-c" ]]; then
