@@ -12,7 +12,7 @@ to_install=(
   zsh
   wezterm
   kitty
-  fd
+  fd-find
   tmux
   lshw
   python3-pip
@@ -26,7 +26,7 @@ to_install=(
   yq   # yaml parser for cli
   glow # markdown renderer
   pnpm
-  yarn
+  yarnpkg
   thunderbird
   gh
   dnf-plugins-core
