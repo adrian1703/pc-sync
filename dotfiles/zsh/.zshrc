@@ -138,6 +138,17 @@ export LANG=en_US.UTF-8
 # podman - docker socket 
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
 # Created by `pipx` on 2025-07-19 10:43:40
-export PATH="$PATH:/home/adrian/.local/bin"
-export PATH="$HOME/.local/share/pnpm/.tools/pnpm/10.14.0:$PATH"
-export JAVA_HOME="/home/adrian/.jdks/openjdk-24.0.1"
+export PATH="$PATH:$HOME/.local/bin"
+export JAVA_HOME="$HOME/.jdks/openjdk-24.0.1"
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

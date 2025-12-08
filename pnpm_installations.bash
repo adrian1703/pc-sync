@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-sudo pnpm install -g @angular/cli
+pnpm install -g @angular/cli
