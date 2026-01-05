@@ -33,16 +33,20 @@ to_install=(
   coolercontrol
   dnf-utils
   google-cloud-cli
+  gzip
+  lazygit
 )
 
 repo_to_activate=(
   wezfurlong/wezterm-nightly
   atim/starship
   codifryed/CoolerControl
+  dejan/lazygit
 )
 # Enable COPR repos if not already enabled
 for repo in "${repo_to_activate[@]}"; do
-  if ! sudo dnf repolist enabled | grep -q "^${repo}"; then
+  repoId=$(sed 's/\//:/g' <<<"$repo")
+  if ! sudo dnf repolist | grep -q "${repoId}"; then
     echo "➕ Enabling COPR repo: $repo"
     sudo dnf copr enable -y "$repo"
   else
