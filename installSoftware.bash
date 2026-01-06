@@ -35,6 +35,11 @@ to_install=(
   google-cloud-cli
   gzip
   lazygit
+  latexmk # latex
+  texlive # latex
+  texlive-scheme-full
+  zathura
+  zathura-pdf-mupdf
 )
 
 repo_to_activate=(
