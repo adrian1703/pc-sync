@@ -3,43 +3,32 @@
 export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.17.8-1
 
 to_install=(
+  dnf-plugins-core dnf-utils
   neovim
-  google-chrome-stable
-  xclip
-  akmod-nvidia akmods kernel-devel kernel-headers # nvidia schenanigans
   stow
-  starship
-  zsh
-  wezterm
-  kitty
-  fd-find
-  tmux
-  lshw
+  akmod-nvidia akmods kernel-devel kernel-headers # nvidia schenanigans
+  starship zsh wezterm kitty tmux                 # terminal stuff
   python3-pip
-  podman
-  podman-compose
-  podman-docker
+  pnpm yarnpkg                                                  # javascript
+  podman podman-compose podman-docker                           # docker stuff
+  latexmk texlive texlive-scheme-full zathura zathura-pdf-mupdf # latex stuff
+  pipewire pipewire-pulseaudio pipewire-alsa wireplumber        #audio
   #nvidia-container-toolkit-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
   #nvidia-container-toolkit-base-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
   #libnvidia-container-tools-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
   #libnvidia-container1-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
-  yq   # yaml parser for cli
-  glow # markdown renderer
-  pnpm
-  yarnpkg
-  thunderbird
-  gh
-  dnf-plugins-core
+  thunderbird # email
+  google-chrome-stable
   coolercontrol
-  dnf-utils
+  lazygit # CLI tools
   google-cloud-cli
+  glow # markdown renderer
+  gh   # github
   gzip
-  lazygit
-  latexmk # latex
-  texlive # latex
-  texlive-scheme-full
-  zathura
-  zathura-pdf-mupdf
+  yq # yaml parser for cli
+  fd-find
+  lshw
+  xclip
 )
 
 repo_to_activate=(
