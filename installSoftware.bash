@@ -31,6 +31,10 @@ to_install=(
   xclip
 )
 
+flatpak_to_install=(
+  md.obsidian.Obsidian
+)
+
 repo_to_activate=(
   wezfurlong/wezterm-nightly
   atim/starship
@@ -83,3 +87,12 @@ for pkg in "${to_install[@]}"; do
 done
 
 sudo dnf update -y
+
+# Flatpak section
+echo "Installing flatpak software"
+for pkg in "${flatpak_to_install[@]}"; do
+  flatpak install -y "${pkg}"
+done
+
+echo "Updating flatpak software"
+flatpak update
