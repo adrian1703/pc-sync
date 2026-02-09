@@ -5,7 +5,7 @@
 1. clone repo 
 2. run `installSoftware.bash`
 3. run `dotfiles/init.bash`
-4. other bashinstall software 
+4. other bashinstall software under software-installations
   - jetbrainsfont.bash 
   - ...
 
@@ -13,6 +13,7 @@
 ## System changes (currently manual)
 
 Settings - keyboard - custom keybinds 
+- os-config/ folder 
 - debind help 
 - rebind screenshot
 - rebind switch window to super tab

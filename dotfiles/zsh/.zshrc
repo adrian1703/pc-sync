@@ -45,6 +45,9 @@ alias work='xfreerdp /run/media/adrian/Stick/arbeit.rdp /f /size:3440x1440 /smar
 alias zeit='n /run/media/adrian/Stick/zeit.txt'
 alias g='./gradlew'
 alias gclb='./gradlew clean build'
+alias obs='flatpak run md.obsidian.Obsidian'
+alias lg='lazygit'
+
 ask() {
   local continue_flag=""
   if [[ "$1" == "-c" ]]; then
@@ -130,7 +133,8 @@ alias gcoall='git checkout -- .'
 alias gr='git remote'
 alias gre='git reset'
 alias gs='git switch'
-alias ghist="git log --graph --decorate --all --pretty=format:'%C(auto)%h%d %C(#888888)(%an; %ar)%Creset %s'"alias graph="git log --graph --decorate --all --pretty=format:'%C(auto)%h%d %C(#888888)(%an; %ar)%Creset %s'"
+alias ghist="git log --graph --decorate --all --pretty=format:'%C(auto)%h%d %C(#888888)(%an; %ar)%Creset %s'"
+alias graph="git log --graph --decorate --all --pretty=format:'%C(auto)%h%d %C(#888888)(%an; %ar)%Creset %s'"
 
 # ENV
 
