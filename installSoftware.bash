@@ -19,7 +19,7 @@ to_install=(
   #libnvidia-container1-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
   thunderbird # email
   google-chrome-stable
-  coolercontrol
+  drawing
   lazygit # CLI tools
   google-cloud-cli
   glow # markdown renderer

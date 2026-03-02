@@ -135,6 +135,9 @@ alias gre='git reset'
 alias gs='git switch'
 alias ghist="git log --graph --decorate --all --pretty=format:'%C(auto)%h%d %C(#888888)(%an; %ar)%Creset %s'"
 alias graph="git log --graph --decorate --all --pretty=format:'%C(auto)%h%d %C(#888888)(%an; %ar)%Creset %s'"
+alias gls="git for-each-ref \
+  --format='%(refname:short)	%(upstream:short)	%(upstream:track)	%(upstream:remotename)' \
+  refs/heads | column -t -s $'\t'"
 
 # ENV
 
