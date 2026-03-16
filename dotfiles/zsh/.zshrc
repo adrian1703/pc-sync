@@ -68,7 +68,7 @@ alias oracle-db-down='podman rm -f oracle-db'
 alias oracle-db-logs='podman logs -f oracle-db'
 
 
-
+alias pdflocal='docker run -p 8080:8080 docker.stirlingpdf.com/stirlingtools/stirling-pdf'
 
 alias ollama-up='sudo podman run -d \
   --name ollama \
