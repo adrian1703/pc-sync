@@ -22,9 +22,6 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-eval "$(starship init zsh)"
-export STARSHIP_CONFIG=~/.starship.toml
-
 # Auto suggestion
 bindkey '^w' autosuggest-execute
 bindkey '^e' autosuggest-accept
@@ -157,5 +154,12 @@ esac
 # pnpm end
 
 
+# load autosuggest 
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+# starship
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.starship.toml
+
+

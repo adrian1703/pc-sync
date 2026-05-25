@@ -6,8 +6,8 @@ to_install=(
   dnf-plugins-core dnf-utils
   neovim
   stow
-  akmod-nvidia akmods kernel-devel kernel-headers # nvidia schenanigans
-  starship zsh wezterm kitty tmux                 # terminal stuff
+  akmod-nvidia akmods kernel-devel kernel-headers     # nvidia schenanigans
+  starship zsh wezterm kitty tmux zsh-autosuggestions # terminal stuff
   python3-pip
   pnpm yarnpkg                                                  # javascript
   podman podman-compose podman-docker                           # docker stuff
