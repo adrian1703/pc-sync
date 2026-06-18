@@ -31,11 +31,11 @@ bindkey '^k' up-line-or-search
 bindkey '^j' down-line-or-search
 
 # Programs
-alias t='tmux'
+alias tm='tmux'
+alias t='terraform'
 alias reload='source ~/.zshrc'
 alias n='nvim'
 alias vim='nvim'
-alias t='tmux'
 alias toolbox='~/jetbrains/toolbox/bin/jetbrains-toolbox'
 alias ts3='/opt/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
 alias work='xfreerdp /run/media/adrian/Stick/arbeit.rdp /f /size:3440x1440 /smart-sizing:3440x1440 /scale-desktop:125'
