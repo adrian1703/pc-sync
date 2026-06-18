@@ -6,6 +6,7 @@ Follow Conventional Commits with this format:
 
 Allowed Types
 minr: Minor changes to existing features (couple lines)
+infr: Infrastructure changes e.g. terraform
 feat: New features; if adjustments are small prefer minor tag
 logs: Changes to logging
 bugs: Bug fixes
