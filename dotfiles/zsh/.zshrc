@@ -139,6 +139,7 @@ export JAVA_HOME="$HOME/.jdks/openjdk-24.0.1"
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PATH:$PNPM_HOME/bin/"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -149,7 +150,7 @@ esac
 # load autosuggest 
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Load Angular CLI autocompletion.
-source <(ng completion script)
+# source <(ng completion script)
 # starship
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.starship.toml

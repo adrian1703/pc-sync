@@ -32,6 +32,7 @@ to_install_everywhere=(
   lshw
   xclip
   terraform
+  nodejs
 )
 
 flatpak_to_install_fedora=(
