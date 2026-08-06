@@ -14,6 +14,7 @@ bindkey -M viins '^?' backward-delete-char    # Backspace
 bindkey -M viins '^[[3~' delete-char           # Delete
 bindkey -M vicmd '^?' backward-delete-char     # Backspace in normal mode
 bindkey -M vicmd '^[[3~' delete-char           # Delete in normal mode
+bindkey '^R' history-incremental-search-backward
 
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/adrian/.zshrc'
@@ -32,13 +33,14 @@ bindkey '^j' down-line-or-search
 
 # Programs
 alias tm='tmux'
-alias t='terraform'
+alias tf='terraform'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
 alias reload='source ~/.zshrc'
 alias n='nvim'
 alias vim='nvim'
 alias toolbox='~/jetbrains/toolbox/bin/jetbrains-toolbox'
 alias ts3='/opt/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
-alias work='xfreerdp /run/media/adrian/Stick/arbeit.rdp /f /size:3440x1440 /smart-sizing:3440x1440 /scale-desktop:125'
 alias zeit='n /run/media/adrian/Stick/zeit.txt'
 alias g='./gradlew'
 alias gclb='./gradlew clean build'
@@ -53,16 +55,6 @@ ask() {
   fi
   llm -m d $continue_flag "$@" | glow
 }
-
-alias oracle-db-up='podman run --name oracle-db \
-  --network bridge \
-  -p 1521:1521 -p 5500:5500 \
-  -e ORACLE_PWD=Oracle123 \
-  -e ORACLE_CHARACTERSET=AL32UTF8 \
-  -v oracle_data:/opt/oracle/oradata \
-  -d container-registry.oracle.com/database/free' 
-alias oracle-db-down='podman rm -f oracle-db'
-alias oracle-db-logs='podman logs -f oracle-db'
 
 
 alias pdflocal='docker run -p 8080:8080 docker.stirlingpdf.com/stirlingtools/stirling-pdf'

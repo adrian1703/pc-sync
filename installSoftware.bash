@@ -9,10 +9,10 @@ to_install=(
   akmod-nvidia akmods kernel-devel kernel-headers     # nvidia schenanigans
   starship zsh wezterm kitty tmux zsh-autosuggestions # terminal stuff
   python3-pip
-  pnpm yarnpkg                                                  # javascript
-  podman podman-compose podman-docker                           # docker stuff
-  latexmk texlive texlive-scheme-full zathura zathura-pdf-mupdf # latex stuff
-  pipewire pipewire-pulseaudio pipewire-alsa wireplumber        #audio
+  pnpm yarnpkg                        # javascript
+  podman podman-compose podman-docker # docker stuff
+  #latexmk texlive texlive-scheme-full zathura zathura-pdf-mupdf # latex stuff
+  pipewire pipewire-pulseaudio pipewire-alsa wireplumber #audio
   #nvidia-container-toolkit-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
   #nvidia-container-toolkit-base-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
   #libnvidia-container-tools-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
@@ -29,6 +29,7 @@ to_install=(
   fd-find
   lshw
   xclip
+  terraform
 )
 
 flatpak_to_install=(
@@ -60,6 +61,8 @@ if [[ ! -f /etc/yum.repos.d/nvidia-container-toolkit.repo ]]; then
 else
   echo "✔ NVIDIA container repo already exists"
 fi
+
+# Add Google repo if not already present
 if [[ ! -f /etc/yum.repos.d/google-cloud-sdk.repo ]]; then
   echo "➕ Adding google cloud container repo ..."
   sudo tee -a /etc/yum.repos.d/google-cloud-sdk.repo <<EOM
@@ -74,6 +77,14 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
 EOM
 else
   echo "✔ google-cloud-cli repo already exists"
+fi
+# Add terraform repo if not already present
+if [[ ! -f /etc/yum.repos.d/hashiporp.repo ]]; then
+  echo "➕ Adding hashiporp container repo ..."
+  wget -O- https://rpm.releases.hashicorp.com/fedora/hashicorp.repo |
+    sudo tee /etc/yum.repos.d/hashicorp.repo >/dev/null
+else
+  echo "✔ hashiporp container repo already exists"
 fi
 
 # Install packages
