@@ -2,14 +2,8 @@
 
 export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.17.8-1
 
-to_install=(
+to_install_fedora=(
   dnf-plugins-core dnf-utils
-  neovim
-  stow
-  akmod-nvidia akmods kernel-devel kernel-headers     # nvidia schenanigans
-  starship zsh wezterm kitty tmux zsh-autosuggestions # terminal stuff
-  python3-pip
-  pnpm yarnpkg                        # javascript
   podman podman-compose podman-docker # docker stuff
   #latexmk texlive texlive-scheme-full zathura zathura-pdf-mupdf # latex stuff
   pipewire pipewire-pulseaudio pipewire-alsa wireplumber #audio
@@ -19,6 +13,14 @@ to_install=(
   #libnvidia-container1-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
   thunderbird # email
   google-chrome-stable
+)
+to_install_everywhere=(
+  neovim
+  stow
+  akmod-nvidia akmods kernel-devel kernel-headers     # nvidia schenanigans
+  starship zsh wezterm kitty tmux zsh-autosuggestions # terminal stuff
+  python3-pip
+  pnpm yarnpkg # javascript
   drawing
   lazygit # CLI tools
   google-cloud-cli
@@ -32,7 +34,7 @@ to_install=(
   terraform
 )
 
-flatpak_to_install=(
+flatpak_to_install_fedora=(
   md.obsidian.Obsidian
 )
 
@@ -88,7 +90,16 @@ else
 fi
 
 # Install packages
-for pkg in "${to_install[@]}"; do
+for pkg in "${to_install_everywhere[@]}"; do
+  if rpm -q "$pkg" &>/dev/null; then
+    echo "✔ $pkg is already installed"
+  else
+    echo "➕ Installing $pkg ..."
+    sudo dnf install -y "$pkg"
+  fi
+done
+
+for pkg in "${to_install_fedora[@]}"; do
   if rpm -q "$pkg" &>/dev/null; then
     echo "✔ $pkg is already installed"
   else
@@ -101,7 +112,7 @@ sudo dnf update -y
 
 # Flatpak section
 echo "Installing flatpak software"
-for pkg in "${flatpak_to_install[@]}"; do
+for pkg in "${flatpak_to_install_fedora[@]}"; do
   flatpak install -y "${pkg}"
 done
 
