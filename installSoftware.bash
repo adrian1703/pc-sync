@@ -25,6 +25,7 @@ to_install_fedora=(
 
 to_install_mac=(
   wget
+  bash
 )
 
 to_install_everywhere=(
