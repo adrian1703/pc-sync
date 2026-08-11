@@ -13,25 +13,31 @@ to_install_fedora=(
   #libnvidia-container1-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
   thunderbird # email
   google-chrome-stable
+  akmod-nvidia akmods kernel-devel kernel-headers     # nvidia schenanigans
+  python3-pip
+  yarnpkg # javascript
+  fd-find
+  lshw
+  terraform
+  google-cloud-cli
+  drawing
 )
+
+to_install_mac=(
+  wget
+)
+
 to_install_everywhere=(
   neovim
   stow
-  akmod-nvidia akmods kernel-devel kernel-headers     # nvidia schenanigans
   starship zsh wezterm kitty tmux zsh-autosuggestions # terminal stuff
-  python3-pip
-  pnpm yarnpkg # javascript
-  drawing
+  pnpm # javascript
   lazygit # CLI tools
-  google-cloud-cli
   glow # markdown renderer
   gh   # github
   gzip
   yq # yaml parser for cli
-  fd-find
-  lshw
   xclip
-  terraform
   nodejs
 )
 
@@ -45,6 +51,35 @@ repo_to_activate=(
   codifryed/CoolerControl
   dejan/lazygit
 )
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if ! command -v brew &>/dev/null; then
+    echo "➕ Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+
+  for pkg in "${to_install_everywhere[@]}"; do
+    if brew list "$pkg" &>/dev/null; then
+      echo "✔ $pkg is already installed"
+    else
+      echo "➕ Installing $pkg ..."
+      brew install "$pkg" -y
+    fi
+  done
+
+  for pkg in "${to_install_mac[@]}"; do
+    if brew list "$pkg" &>/dev/null; then
+      echo "✔ $pkg is already installed"
+    else
+      echo "➕ Installing $pkg ..."
+      brew install "$pkg" -y
+    fi
+  done
+  echo "➕FINISHED ➕➕➕➕"
+  exit 0
+fi
+
+  
 # Enable COPR repos if not already enabled
 for repo in "${repo_to_activate[@]}"; do
   repoId=$(sed 's/\//:/g' <<<"$repo")
