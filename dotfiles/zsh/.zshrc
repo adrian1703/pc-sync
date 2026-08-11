@@ -148,7 +148,11 @@ esac
 
 
 # load autosuggest 
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+else
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 # Load Angular CLI autocompletion.
 # source <(ng completion script)
 # starship
