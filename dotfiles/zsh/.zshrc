@@ -41,7 +41,6 @@ alias n='nvim'
 alias vim='nvim'
 alias toolbox='~/jetbrains/toolbox/bin/jetbrains-toolbox'
 alias ts3='/opt/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
-alias zeit='n /run/media/adrian/Stick/zeit.txt'
 alias g='./gradlew'
 alias gclb='./gradlew clean build'
 alias obs='flatpak run md.obsidian.Obsidian'
@@ -94,9 +93,6 @@ alias dpa="docker ps -a"
 alias dl="docker ps -l -q"
 alias dx="docker exec -it"
 
-
-alias docker='podman'
-alias d='podman'
 # alias dco="podman compose"
 # alias dps="podman ps"
 # alias dpa="podman ps -a"
@@ -132,10 +128,17 @@ alias gls="git for-each-ref \
 
 export LANG=en_US.UTF-8
 # podman - docker socket 
-export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
 # Created by `pipx` on 2025-07-19 10:43:40
 export PATH="$PATH:$HOME/.local/bin"
-export JAVA_HOME="$HOME/.jdks/openjdk-24.0.1"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export JAVA_HOME="$HOME/.jdks/openjdk-26.0.2"
+else
+  alias docker='podman'
+  alias d='podman'
+  export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
+  export JAVA_HOME="$HOME/.jdks/openjdk-24.0.1"
+fi
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
