@@ -133,6 +133,7 @@ export PATH="$PATH:$HOME/.local/bin"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export JAVA_HOME="$HOME/.jdks/openjdk-26.0.2"
+  export PATH="$PATH:$HOME/Library/Python/3.14/bin"
 else
   alias docker='podman'
   alias d='podman'
