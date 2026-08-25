@@ -27,6 +27,9 @@ to_install_mac=(
   wget
   bash
   rectangle
+  terraform-linters/tap/tflint
+  tfupdate
+  hashicorp/tap/terraform
 )
 
 to_install_everywhere=(
