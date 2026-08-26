@@ -13,7 +13,7 @@ to_install_fedora=(
   #libnvidia-container1-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
   thunderbird # email
   google-chrome-stable
-  akmod-nvidia akmods kernel-devel kernel-headers     # nvidia schenanigans
+  akmod-nvidia akmods kernel-devel kernel-headers # nvidia schenanigans
   python3-pip
   yarnpkg # javascript
   fd-find
@@ -30,16 +30,17 @@ to_install_mac=(
   terraform-linters/tap/tflint
   tfupdate
   hashicorp/tap/terraform
+  copilot-cli
 )
 
 to_install_everywhere=(
   neovim
   stow
   starship zsh wezterm kitty tmux zsh-autosuggestions # terminal stuff
-  pnpm # javascript
-  lazygit # CLI tools
-  glow # markdown renderer
-  gh   # github
+  pnpm                                                # javascript
+  lazygit                                             # CLI tools
+  glow                                                # markdown renderer
+  gh                                                  # github
   gzip
   yq # yaml parser for cli
   xclip
@@ -84,7 +85,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   exit 0
 fi
 
-  
 # Enable COPR repos if not already enabled
 for repo in "${repo_to_activate[@]}"; do
   repoId=$(sed 's/\//:/g' <<<"$repo")

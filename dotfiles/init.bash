@@ -21,6 +21,7 @@ configToDestinationDir[tmux]="$HOME/.config/tmux"
 configToDestinationDir[wezterm]="$HOME/.config/wezterm"
 configToDestinationDir[nvim]="$HOME/.config/nvim"
 configToDestinationDir[kitty]="$HOME/.config/kitty"
+configToDestinationDir[copilot]="$HOME/.copilot"
 
 for configPkg in "${!configToDestination[@]}"; do
   destination="${configToDestination[$configPkg]}"
