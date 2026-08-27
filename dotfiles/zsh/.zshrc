@@ -125,7 +125,7 @@ alias gls="git for-each-ref \
   refs/heads | column -t -s $'\t'"
 
 # ENV
-
+export AGENTS="$HOME/.copilot/agents"
 export LANG=en_US.UTF-8
 # podman - docker socket 
 # Created by `pipx` on 2025-07-19 10:43:40
