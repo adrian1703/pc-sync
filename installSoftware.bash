@@ -31,6 +31,7 @@ to_install_mac=(
   tfupdate
   hashicorp/tap/terraform
   copilot-cli
+  terraform-ls
 )
 
 to_install_everywhere=(
