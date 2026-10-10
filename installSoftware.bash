@@ -45,6 +45,7 @@ to_install_everywhere=(
   yq # yaml parser for cli
   xclip
   nodejs
+  fastfetch
 )
 
 flatpak_to_install_fedora=(
