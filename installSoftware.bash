@@ -36,7 +36,7 @@ to_install_mac=(
 to_install_everywhere=(
   neovim
   stow
-  starship zsh wezterm kitty tmux zsh-autosuggestions # terminal stuff
+  starship zsh kitty tmux zsh-autosuggestions # terminal stuff
   pnpm                                                # javascript
   lazygit                                             # CLI tools
   glow                                                # markdown renderer
@@ -85,6 +85,23 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   echo "➕FINISHED ➕➕➕➕"
   exit 0
 fi
+
+if [[ -f /etc/os-release ]] && grep -q '^ID=ubuntu' /etc/os-release; then
+  sudo apt-get update && sudo apt-get upgrade
+
+  for pkg in "${to_install_everywhere[@]}"; do
+    if dpkg -s "$pkg" &>/dev/null; then
+      echo "✔ $pkg is already installed"
+    else
+      echo "➕ Installing $pkg ..."
+      sudo apt-get install -y "$pkg"
+    fi
+  done
+  echo "➕FINISHED ➕➕➕➕"
+  exit 0
+fi
+
+###### Fedora stuff from here on out ########
 
 # Enable COPR repos if not already enabled
 for repo in "${repo_to_activate[@]}"; do
